@@ -8,20 +8,28 @@ This document serves as the ground-truth specification for the site's design phi
 
 ## 1. Core Architectural Philosophy & Identity
 
-### 1.1 Functional System Design & Boundary Enforcement
+### 1.1 Championing Radical Simplicity in Complex Systems
+- **Simplicity as the Hardest Architectural Discipline**: If Werner Vogels is the voice of the *Frugal Architect* (cost and latency as primary constraints), Thabani Chibanda champions *Radical Simplicity*. Complex systems naturally accumulate incidental friction, speculative abstractions, and organizational empire-building. The architect's primary duty is subtraction: preserving human comprehension, minimizing moving parts, and resisting premature distribution.
+- **Microkernel Isolation & Modularity (Tanenbaum)**: Isolate faults rigorously. Modularize systems such that failures in edge adapters cannot contaminate the core domain kernel. Keep drivers and untrusted I/O external to business rules.
+
+### 1.2 Functional System Design & Boundary Enforcement
 - **OCaml & Type-Driven Correctness**: Treat OCaml not just as a preference, but as a superpower for domain modeling. Algebraic Data Types (ADTs), pattern matching, and expressive module systems allow domain invariants and state machines to be enforced at compile-time rather than through fragile runtime checks.
+- **Domain Modeling Made Functional & Railway-Oriented Programming (Scott Wlaschin)**:
+  - Model business workflows as pure composable pipelines of types: `Input -> Result<Output, Error>`.
+  - Treat success and failure as explicit tracks of a two-track railway. Errors are domain data, not out-of-band exceptions or stack-trace surprises.
+  - Make illegal states completely unrepresentable in data types.
 - **Architectural Patterns (DDD + Hexagonal + FC/IS + EDA)**:
   - **Domain-Driven Design (DDD)**: Explicit bounded contexts and rich, type-safe domain entities.
   - **Hexagonal Architecture (Ports & Adapters)**: Strict decoupling of core business domain logic from infrastructure, databases, and I/O drivers.
   - **Functional Core, Imperative Shell (FC/IS)**: Pure, side-effect-free domain calculation cores wrapped in thin, imperative I/O shells at the application boundary.
   - **Event-Driven Architecture (EDA)**: Asynchronous event streams and Saga orchestrations for resilient, loosely coupled state synchronization across boundaries.
 
-### 1.2 The "Frugal Architect" Mindset
+### 1.3 The "Frugal Architect" Mindset
 - Heavily shaped by Amazon engineering principles (specifically *The Frugal Architect* framework).
 - **Cost & Latency as Core Metrics**: Every architectural choice has a price tag and a tail-latency footprint. Optimize in-process execution before paying the cloud tax for microservice sprawl or managed cluster daemons.
 - **In-Process Performance over Distributed Bloat**: Prefer vertical scaling, local embedded storage, and single-process modular monoliths until multi-node distribution is proven necessary. Zero-copy analytical queries (DuckDB + S3 Parquet) and localized caching win over heavy cloud data warehouse spend.
 
-### 1.3 Rationalism & First-Principles Philosophy
+### 1.4 Rationalism & First-Principles Philosophy
 - Influenced by **René Descartes** (*Discourse on the Method*) and epistemological skepticism: question inherited software dogmas, strip abstractions down to foundational truths, and rebuild systems step-by-step from undeniable first principles.
 - Anchored in **Alan Turing’s** builder mindset: *"We can only see a short distance ahead, but we can see plenty there that needs to be done."* Formal correctness, type systems, and low-latency optimization are tools to enable continuous, reliable building—never excuses for premature optimization or academic isolation.
 
@@ -33,19 +41,22 @@ The technical mind and system philosophy driving this site are heavily shaped by
 
 ### Computer Science Foundations & Low-Level Mechanics
 - **Introduction to the Theory of Computation** — *Michael Sipser* (Automata, formal languages, reducibility, and computational complexity).
+- **Domain Modeling Made Functional** — *Scott Wlaschin* (Type-driven design, algebraic data structures, and railway-oriented programming pipelines).
+- **Modern Operating Systems** — *Andrew S. Tanenbaum* (Microkernel design, fault isolation boundaries, concurrency, and modular memory layers).
 - **Foundations of Computer Science** — *Alfred Aho & Jeffrey Ullman*.
 - **CS106B Course Reader: Programming Abstractions in C++** — *Stanford University (Eric Roberts / Jerry Cain)* (Fundamental abstraction boundaries, pointer mechanics, and algorithmic problem solving).
 - **Compilers: Principles, Techniques, and Tools (The Dragon Book)** — *Alfred Aho, Monica Lam, Ravi Sethi, & Jeffrey Ullman* (Lexing, parsing, and code generation mechanics).
-- **Modern Operating Systems** — *Andrew S. Tanenbaum* (Kernel design, memory management, process concurrency, and I/O subsystems).
 
 ### Distributed Systems & System Architecture
 - **The ZeroMQ Guide (ØMQ)** — *Pieter Hintjens* (Distributed messaging topologies, lock-free concurrency, and socket-level protocol design).
+- **The Frugal Architect** — *Werner Vogels* (Cost and tail-latency as non-functional constraints).
 - **Amazon’s DynamoDB Paper** (*Dynamo: Amazon’s Highly Available Key-value Store*) — *DeCandia et al.* (Eventual consistency, quorum systems, consistent hashing, and high-availability trade-offs).
 - **Fundamentals of Software Architecture** & **Software Architecture: The Hard Parts** — *Neal Ford, Mark Richards, Pramod Sadalage, & Zhamak Dehghani* (Trade-off analysis, modularity, dynamic coupling, and architectural governance).
 - **Refactoring: Improving the Design of Existing Code** — *Martin Fowler* (Code smells, disciplined structural transformations, and evolutionary design).
 
 ### Philosophical Foundation
 - **Discourse on the Method** — *René Descartes* (Methodological skepticism, rational reductionism, and constructing complex truths from simple foundational blocks).
+- **Computing Machinery and Intelligence** — *Alan Turing* (Pragmatic machine intelligence, bounds of mechanical reasoning, and continuous iterative construction).
 
 ---
 
@@ -65,7 +76,7 @@ The technical mind and system philosophy driving this site are heavily shaped by
 | Domain | Technologies & Systems |
 | :--- | :--- |
 | **Languages** | OCaml (Primary Domain/Functional), Java, Scala, Python, TypeScript, JavaScript |
-| **Core Architecture** | Modular Monoliths, Domain-Driven Design (DDD), Hexagonal Architecture, Functional Core / Imperative Shell (FC/IS), Event-Driven Architecture (EDA), Custom Saga Orchestration, ZeroMQ |
+| **Core Architecture** | Modular Monoliths, Domain-Driven Design (DDD), Railway-Oriented Programming (ROP), Hexagonal Architecture, Functional Core / Imperative Shell (FC/IS), Event-Driven Architecture (EDA), Custom Saga Orchestration, ZeroMQ |
 | **Data & Storage** | PostgreSQL, DuckDB, DynamoDB, S3 Parquet Data Lakes, Elasticsearch, OracleDB, Embedded LMDB |
 | **Cloud & Runtime** | AWS (EC2, Lambda, S3, DynamoDB, CloudFront, CloudFormation, Fargate, RDS), Docker, Caddy, Systemd, Linux |
 | **Web & Frontend** | HTMX, React, Vue.js, Tailwind CSS |
@@ -77,33 +88,39 @@ The technical mind and system philosophy driving this site are heavily shaped by
 
 ### 5.1 Style & Tone
 - **Thoughtful, Grounded, & Deeply Systems-Focused**: Writes like a senior practitioner reflecting in an engineering journal or technical essay—calm, confident, and direct.
+- **The Voice of Simplicity**: Champions simplicity against industry fashion. Demonstrates that doing less with tighter type constraints and fewer distributed daemons is an act of engineering discipline.
 - **Analytic & Philosophical**: Blends distributed systems engineering with Cartesian reductionism and a pragmatic, socio-technical perspective.
 - **Unpretentious**: No self-aggrandizing hype, growth-hacking jargon, or generic tech buzzwords (*"rockstar"*, *"ninja"*, *"passionate visionary"*).
 
 ### 5.2 Prose Standards
-- **Use Precise Terminology**: Name specific architectural patterns and concepts rather than hand-waving (*"bounded contexts"*, *"algebraic data types"*, *"saga compensations"*, *"ports and adapters"*, *"server-side idempotency"*, *"zero-copy Parquet queries"*, *"tail-latency compression"*).
-- **Acknowledge Trade-Offs**: Every technical essay or case study must articulate *why* a choice was made and what was sacrificed (e.g., OCaml gives compile-time safety and lightweight memory footprints, but requires building custom infrastructure bindings).
+- **Use Precise Terminology**: Name specific architectural patterns and concepts rather than hand-waving (*"railway-oriented pipelines"*, *"algebraic data types"*, *"fault isolation boundaries"*, *"saga compensations"*, *"ports and adapters"*, *"server-side idempotency"*, *"zero-copy Parquet queries"*, *"tail-latency compression"*).
+- **Acknowledge Trade-Offs**: Every technical essay or case study must articulate *why* a choice was made and what was sacrificed.
 - **First-Person Authenticity**: Write in concise, direct first-person (`I`, `we`) or clear declarative statements.
 
 ---
 
 ## 6. Visual Design & UI System
 
-### 6.1 Typography & Theme
+### 6.1 Navigation & Tabs
+- Single static file (`index.html`), zero framework dependencies.
+- Navigation divided into three distinct conceptual views:
+  1. **Overview** (`#overview`): Hero intro, resume/contact quick links, featured essay, systems in production (case studies), and career track.
+  2. **Principles** (`#principles`): Architectural Manifesto & Developer Principles.
+  3. **Canon & Essays** (`#canon`): Reading canon and expanded 5-point technical field essays.
+- Deep-linking supported via location hash (`#overview`, `#principles`, `#canon`).
+
+### 6.2 Typography & Theme
 - **Theme Concept**: Warm paper/stone editorial journal. Quiet, readable, high contrast without harsh pure-black backgrounds.
 - **Palette**:
   - Background (Light): `#fcfaf6` (Stone 50)
   - Background (Dark): `#1a1816` (Stone 900)
-  - Text Primary: `#2c2825` (Stone 800) / `#fcfaf6` (Stone 50)
+  - Text Primary: `#2c2825` (Stone 800) / `#ece7dd` (Stone 100)
   - Accent Color: Muted forest sage (`#2b5b46` / `#8ebf9f`)
+  - Accent Alert/Tradeoff: Terracotta (`#9e472a` / `#d08a6a`)
 - **Font Stack**:
   - **Headings & Quotes**: *Newsreader* or *Georgia* (Editorial Serif)
   - **Body Copy**: *Plus Jakarta Sans* or clean system sans-serif
   - **Code & Metadata**: *JetBrains Mono* or system monospace
-
-### 6.2 Explicit Banned Tropes
-- **No Cyberpunk/Neon Aesthetics**: Avoid glowing green terminal windows, matrix rain, floating canvas particle scripts, or gimmicky retro console animations.
-- **No Heavy Framework Noise**: Keep pages static, fast-loading, and zero-dependency where possible. Standard single-file static HTML/Tailwind CDN or minimal SSG deployments (GitHub Pages/Vercel) are preferred.
 
 ---
 
@@ -112,7 +129,7 @@ The technical mind and system philosophy driving this site are heavily shaped by
 When generating new content, refactoring layout sections, or drafting architectural field notes:
 
 1. [ ] **Does it ground theory in production reality?** Reference concrete systems (like OCaml, DuckDB, S3, or AWS) rather than abstract pseudoscience.
-2. [ ] **Does it honor the canon?** Reflect principles from foundational texts (Sipser, Tanenbaum, Fowler, Hintjens, Ford & Richards, or Descartes).
-3. [ ] **Does it present trade-offs clearly?** Ensure every architectural opinion evaluates friction, cognitive load, cloud cost (Frugal Architect), and operational overhead.
-4. [ ] **Is the layout uncluttered?** Preserve generous whitespace, readable line lengths (~65-75 characters), and clear typographic hierarchy.
+2. [ ] **Does it honor the canon?** Reflect principles from foundational texts (Wlaschin, Tanenbaum, Sipser, Fowler, Hintjens, Vogels, or Descartes).
+3. [ ] **Does it present trade-offs clearly?** Ensure every architectural opinion evaluates friction, cognitive load, cloud cost, and operational overhead.
+4. [ ] **Is simplicity prioritized?** Challenge added dependencies and architectural indirection.
 5. [ ] **Is it free of hype?** Let technical execution and clear reasoning speak for themselves.
