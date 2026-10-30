@@ -1,0 +1,208 @@
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(rgba(20, 19, 17, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark body {
+  background-image: radial-gradient(rgba(242, 238, 229, 0.04) 1px, transparent 1px);
+}
+
+/* Subtle engineering telemetry badges */
+.sys-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
+
+.code-window {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.lineage-tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.68rem;
+  line-height: 1.3;
+  padding: 0.12rem 0.45rem;
+  border-radius: 3px;
+  border: 1px solid #e0d8c3;
+  background-color: #f5f1e8;
+  color: #3d3933;
+}
+
+.dark .lineage-tag {
+  border-color: #2e2b26;
+  background-color: #1f1d1a;
+  color: #c5bdb0;
+}
+
+/* Editorial prose rhythm and comfortable reading measure */
+.prose-serif {
+  max-width: none;
+}
+
+.prose-serif p {
+  font-family: 'Newsreader', Georgia, Cambria, serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+@media (min-width: 640px) {
+  .prose-serif p {
+    font-size: 1.15rem;
+    line-height: 1.78;
+  }
+}
+
+/* Inline code tokens inside editorial prose */
+.prose-serif code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.84em;
+  background-color: #f5f1e8;
+  border: 1px solid #e0d8c3;
+  color: #141311;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+.dark .prose-serif code {
+  background-color: #1f1d1a;
+  border-color: #2e2b26;
+  color: #f2eee5;
+}
+
+/* Editorial portrait plate with calibrated saturation */
+.editorial-portrait-frame {
+  position: relative;
+  overflow: hidden;
+  line-height: 0;
+  transform: translateZ(0);
+}
+
+.editorial-portrait {
+  display: block;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: auto;
+  filter: saturate(0.92) contrast(1.02);
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.editorial-portrait-frame:hover .editorial-portrait {
+  filter: saturate(1) contrast(1);
+}
+
+/* Literary drop cap for featured openings */
+.dropcap::first-letter {
+  float: left;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 3.35rem;
+  line-height: 0.85;
+  padding-top: 0.08em;
+  padding-right: 0.14em;
+  color: #24543f;
+  font-weight: 500;
+}
+
+.dark .dropcap::first-letter {
+  color: #97c7a9;
+}
+
+/* Blockquotes inside long-form essays */
+.editorial-quote {
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
+  font-size: 1.12rem;
+  line-height: 1.72;
+  border-left: 2px solid #24543f;
+  padding-left: 1.15rem;
+  margin: 1.25rem 0;
+  color: #141311;
+}
+
+.dark .editorial-quote {
+  border-left-color: #97c7a9;
+  color: #f2eee5;
+}
+
+/* Active navigation & essay filter states */
+.nav-link.nav-active {
+  color: #141311;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1.5px;
+}
+
+.dark .nav-link.nav-active {
+  color: #f2eee5;
+}
+
+.filter-btn.filter-active {
+  color: #141311;
+  border-color: #24543f;
+  background-color: #f5f1e8;
+}
+
+.dark .filter-btn.filter-active {
+  color: #f2eee5;
+  border-color: #97c7a9;
+  background-color: #1f1d1a;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #24543f;
+  outline-offset: 3px;
+}
+
+.dark a:focus-visible,
+.dark button:focus-visible {
+  outline-color: #97c7a9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    transition: none;
+  }
+}
+
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}

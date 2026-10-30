@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Canon &amp; Library — Thabani Chibanda</title>
+  <meta name="description"
+    content="Annotated reading canon spanning business economics, distributed systems, computer science theory, and literary criticism.">
+  <meta property="og:title" content="The Canon &amp; Library — Thabani Chibanda">
+  <meta property="og:description"
+    content="Annotated reading canon spanning business economics, distributed systems, computer science theory, and literary criticism.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfaf6">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171614">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23fcfaf6'/><text x='32' y='44' font-family='Georgia,serif' font-size='36' font-style='italic' text-anchor='middle' fill='%2324543f'>T</text></svg>">
+
+  <!-- Early Theme Detection -->
+  <script>
+    (function () {
+      var stored = null;
+      try { stored = localStorage.getItem('theme'); } catch (e) { }
+      var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', dark);
+      document.documentElement.classList.toggle('light', !dark);
+    })();
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            paper: '#fcfaf6',
+            paperCard: '#f5f1e8',
+            paperBorder: '#cebe9d',
+            ink: '#141311',
+            inkMuted: '#3d3933',
+            terracotta: '#943f24',
+            terracottaLight: '#d89476',
+            sage: '#24543f',
+            sageLight: '#97c7a9',
+            charcoal: '#171614',
+            charcoalCard: '#1f1d1a',
+            charcoalBorder: '#3f3b34',
+            bone: '#f2eee5',
+            boneMuted: '#c5bdb0'
+          },
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'Cambria', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts for Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Modular Custom Stylesheet -->
+  <link rel="stylesheet" href="./css/styles.css">
+
+  <!-- Frameworkless JavaScript Logic -->
+  <script src="./js/app.js" defer></script>
+</head>
+
+<body
+  class="bg-paper text-ink dark:bg-charcoal dark:text-bone min-h-screen font-sans selection:bg-sage selection:text-paper dark:selection:bg-sageLight dark:selection:text-charcoal transition-colors">
+
+  <a href="#main"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-paperCard dark:focus:bg-charcoalCard focus:border focus:border-sage dark:focus:border-sageLight focus:px-3 focus:py-2 focus:rounded font-mono text-xs">
+    Skip to content
+  </a>
+
+  <!-- Header / Navigation -->
+  <header
+    class="sticky top-0 z-40 border-b border-paperBorder dark:border-charcoalBorder bg-paper/95 dark:bg-charcoal/95 backdrop-blur-none px-4 sm:px-6 py-3.5 sm:py-4">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-3">
+      <div class="flex items-center justify-between">
+        <a href="./"
+          class="font-serif italic text-xl font-medium tracking-tight text-ink dark:text-bone hover:text-sage dark:hover:text-sageLight transition-colors">
+          Thabani Chibanda
+        </a>
+
+        <button onclick="toggleTheme()" type="button" aria-label="Toggle color theme"
+          class="sm:hidden font-mono text-xs text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors px-2 py-1 rounded border border-paperBorder dark:border-charcoalBorder"
+          title="Toggle theme">
+          <span id="themeLabelMobile">Dark</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between sm:justify-end space-x-5 overflow-x-auto scrollbar-none py-0.5">
+        <nav class="flex items-center space-x-4 sm:space-x-6 font-mono text-xs whitespace-nowrap" aria-label="Main Navigation">
+          <a href="./" id="nav-overview"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Overview
+          </a>
+          <a href="./principles.html" id="nav-principles"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Principles
+          </a>
+          <a href="./essays.html" id="nav-essays"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Essays
+          </a>
+          <a href="./canon.html" id="nav-canon"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Canon
+          </a>
+        </nav>
+
+        <button onclick="toggleTheme()" type="button" aria-label="Toggle color theme"
+          class="hidden sm:inline-block font-mono text-xs text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors pl-2"
+          title="Toggle theme">
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main id="main" class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-12">
+
+    <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3 flex items-baseline justify-between">
+      <h1 class="font-serif text-3xl sm:text-[2rem] font-normal text-ink dark:text-bone">
+        The canon &amp; library
+      </h1>
+      <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">foundational texts</span>
+    </div>
+
+    <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-4">
+      <p>
+        The other pages try not to lean on famous names. This one is the shelf: the books, papers, and essays
+        I actually reread. They sit behind the notebook, not in front of it.
+      </p>
+    </div>
+
+    <!-- Synthesis Map: How the shelves operate together -->
+    <section class="border border-paperBorder dark:border-charcoalBorder rounded bg-paperCard/45 dark:bg-charcoalCard/45 p-5 space-y-4">
+      <div class="flex items-baseline justify-between border-b border-paperBorder dark:border-charcoalBorder pb-2">
+        <h2 class="font-mono text-xs text-sage dark:text-sageLight uppercase tracking-wider font-medium">
+          How the canon synthesizes in practice
+        </h2>
+        <span class="font-mono text-[10px] text-inkMuted dark:text-boneMuted">decision lens</span>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 font-sans text-xs">
+        <div class="space-y-1">
+          <p class="font-mono text-[11px] text-ink dark:text-bone font-medium">01 · Economics &amp; Frugality</p>
+          <p class="text-inkMuted dark:text-boneMuted leading-relaxed">
+            Buffett + Vogels + Munger: price every byte, tie tail-latency to unit margin, and invert against ruin first.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <p class="font-mono text-[11px] text-ink dark:text-bone font-medium">02 · Distributed Resilience</p>
+          <p class="text-inkMuted dark:text-boneMuted leading-relaxed">
+            Dynamo + Hintjens + Sagas: smart endpoints, decentralized compensations, and eventual consistency over locks.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <p class="font-mono text-[11px] text-ink dark:text-bone font-medium">03 · Architecture &amp; Trade-offs</p>
+          <p class="text-inkMuted dark:text-boneMuted leading-relaxed">
+            Richards &amp; Ford + Fowler + Tanenbaum: modularity before distribution, ADR falsification, and kernel isolation.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <p class="font-mono text-[11px] text-ink dark:text-bone font-medium">04 · Types &amp; Reactive State</p>
+          <p class="text-inkMuted dark:text-boneMuted leading-relaxed">
+            Wlaschin + MirageOS + Async FRP: domain models as executable types and time-varying signal flows without drift.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <p class="font-mono text-[11px] text-ink dark:text-bone font-medium">05 · Mechanical Sympathy</p>
+          <p class="text-inkMuted dark:text-boneMuted leading-relaxed">
+            Shaw + Turing + Sipser + Aho: linear memory, stack layouts, computability bounds, and respect for the hardware.
+          </p>
+        </div>
+        <div class="space-y-1">
+          <p class="font-mono text-[11px] text-ink dark:text-bone font-medium">06 · Poetics &amp; Subcultures</p>
+          <p class="text-inkMuted dark:text-boneMuted leading-relaxed">
+            Wilson + Gioia + Schreiber + Newport: craft gathers in pools; hand-written code concentrates where thinking happens.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 Annotated Reading Shelves -->
+    <div class="grid sm:grid-cols-2 gap-x-10 gap-y-12">
+      <!-- Shelf I: Economics & Capital Allocation -->
+      <section class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-5">
+        <h2 class="font-mono text-xs text-sage dark:text-sageLight font-medium uppercase tracking-wider">
+          I · Economics, frugality &amp; capital allocation
+        </h2>
+        <ul class="space-y-4">
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Poor Charlie's Almanack</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Charlie Munger</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Inversion, multidisciplinary mental models, and avoiding systemic ruin before optimizing the upside.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">The Essays of Warren Buffett</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Warren Buffett &amp; Lawrence Cunningham</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Circle of competence, owner earnings, and treating software architecture as capital allocation.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">The Frugal Architect</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Werner Vogels</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Cost and tail-latency as first-class non-functional requirements tied directly to unit economics; unobserved systems lead to unknown costs.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Slow Productivity &amp; Deep Work</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Cal Newport</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Do fewer things, guard cognitive depth, and let unhurried craft compound without frantic churn.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Shelf II: Distributed Systems & Resilience -->
+      <section class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-5">
+        <h2 class="font-mono text-xs text-sage dark:text-sageLight font-medium uppercase tracking-wider">
+          II · Distributed systems, resilience &amp; networks
+        </h2>
+        <ul class="space-y-4">
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">The ZeroMQ Guide</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Pieter Hintjens</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Lock-free concurrency, asynchronous topologies, and smart endpoints over brittle centralized brokers.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Dynamo: Amazon's Key-Value Store</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">DeCandia et al.</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Quorums, eventual consistency, and designing for partial failure across partitioned, asynchronous networks.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Sagas</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Hector Garcia-Molina &amp; Kenneth Salem (1987)</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Decomposing long-lived transactions into sequences of discrete actions paired with backward compensations without distributed locks.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Shelf III: Software Architecture & Modularity -->
+      <section class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-5">
+        <h2 class="font-mono text-xs text-sage dark:text-sageLight font-medium uppercase tracking-wider">
+          III · Software architecture, modularity &amp; trade-offs
+        </h2>
+        <ul class="space-y-4">
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Fundamentals of Software Architecture</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Mark Richards &amp; Neal Ford</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              The First &amp; Second Laws of Software Architecture, fitness functions, and turning vague preferences into explicit trade-off rubrics.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Software Architecture: The Hard Parts</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Neal Ford, Mark Richards, Pramod Sadalage &amp; Zhamak Dehghani</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Modern distributed trade-off analysis: architectural quanta, granularity vs. coupling, and choosing modular monoliths before splitting services.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Patterns of Enterprise Application Architecture</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Martin Fowler</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Service Layers, Domain Models, Data Mappers, and enduring structural boundaries that prevent "big ball of mud" coupling.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Modern Operating Systems</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Andrew S. Tanenbaum</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Clean abstraction layering and kernel-style fault isolation: peripheral failures must never compromise core invariants.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Shelf IV: Functional Systems & Type Theory -->
+      <section class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-5">
+        <h2 class="font-mono text-xs text-sage dark:text-sageLight font-medium uppercase tracking-wider">
+          IV · Functional systems, types &amp; reactive state
+        </h2>
+        <ul class="space-y-4">
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Domain Modeling Made Functional</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Scott Wlaschin</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Algebraic data types and railway-oriented workflows that make illegal business states unrepresentable.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Programming Unikernels in the Large via Functor Driven Development</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Experience Report · MirageOS</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              OCaml functor parameterization to decouple core domain logic entirely from I/O drivers and storage, foundational to Ariadne.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Asynchronous Functional Reactive Programming for GUIs</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Evan Czaplicki &amp; Stephen Chong</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Time-varying signals and deadlock-free reactive updates without callback cascades or client-side state divergence.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Shelf V: Mechanical Sympathy, Computation & Hardware -->
+      <section class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-5">
+        <h2 class="font-mono text-xs text-sage dark:text-sageLight font-medium uppercase tracking-wider">
+          V · Mechanical sympathy, computation &amp; compilers
+        </h2>
+        <ul class="space-y-4">
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Learn C the Hard Way</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Zed A. Shaw</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              The "Cartesian dream of C": linear memory, pointer mechanics, stack/heap layouts, and raw hardware sympathy.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Introduction to the Theory of Computation</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Michael Sipser</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Automata, decidability, and formal theoretical bounds on what systems can compute.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Discourse on the Method</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">René Descartes</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Methodological doubt and decomposing complex architectures into clear, verifiable constituent parts.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Computing Machinery and Intelligence</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Alan Turing</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Rigorous inquiry tempered by intellectual honesty about what remains ahead.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Compilers: Principles, Techniques &amp; Tools</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Aho, Lam, Sethi &amp; Ullman</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Lexing, parsing, type checking, and how high-level abstractions materialize into physical machine execution.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Shelf VI: Poetics, Criticism & Letters -->
+      <section class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-5">
+        <h2 class="font-mono text-xs text-terracotta dark:text-terracottaLight font-medium uppercase tracking-wider">
+          VI · Poetics, criticism &amp; letters
+        </h2>
+        <ul class="space-y-4">
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Is Verse a Dying Technique?</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Edmund Wilson</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              How prose absorbed narrative and history while verse narrowed into a specialized lyric craft.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Who Killed Poetry?</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Joseph Epstein</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              A sharp warning against institutional overproduction detached from living readers.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Can Poetry Matter?</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Dana Gioia</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Critical honesty, loyalty to the reader, and art thriving inside a committed subculture.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Poetry and the Problem of Standards</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Jan Schreiber</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Why retrospective resonance resists mechanical rubrics, and how thoughtful communities collect in pools.
+            </p>
+          </li>
+          <li>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">Death to the Death of Poetry</p>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Donald Hall</p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Separating public perception from the quiet vitality of actual readers and writers.
+            </p>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="border-t border-paperBorder dark:border-charcoalBorder pt-6 flex flex-wrap gap-6 font-mono text-xs">
+      <a href="./essays.html" class="text-ink dark:text-bone underline underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
+        Read extended essays &amp; "Can Poetry Matter? (Is Coding Dead?)" &rarr;
+      </a>
+      <a href="./principles.html" class="text-inkMuted dark:text-boneMuted hover:text-sage dark:hover:text-sageLight transition-colors">
+        Review operating principles &rarr;
+      </a>
+    </div>
+
+    <!-- Turing Quote -->
+    <section class="py-8 text-center space-y-3">
+      <div class="w-10 h-px bg-sage/60 dark:bg-sageLight/60 mx-auto" aria-hidden="true"></div>
+      <p class="font-serif italic text-xl sm:text-2xl text-ink dark:text-bone leading-relaxed max-w-xl mx-auto">
+        "We can only see a short distance ahead, but we can see plenty there that needs to be done."
+      </p>
+      <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— Alan Turing, Computing Machinery and Intelligence</p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-paperBorder dark:border-charcoalBorder py-8 sm:py-10 px-4 sm:px-6 mt-12 sm:mt-16">
+    <div class="max-w-5xl mx-auto space-y-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-inkMuted dark:text-boneMuted">
+        <nav aria-label="Footer Navigation" class="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-2">
+          <a href="./" class="hover:text-ink dark:hover:text-bone transition-colors">Overview</a>
+          <a href="./principles.html" class="hover:text-ink dark:hover:text-bone transition-colors">Principles</a>
+          <a href="./essays.html" class="hover:text-ink dark:hover:text-bone transition-colors">Essays</a>
+          <a href="./canon.html" class="hover:text-ink dark:hover:text-bone transition-colors">Canon</a>
+        </nav>
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-x-5 gap-y-2">
+          <button onclick="copyEmail()" type="button" class="underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
+            Email
+          </button>
+          <a href="./ThabaniChibandaResume_.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-ink dark:hover:text-bone transition-colors">
+            Resume (PDF)
+          </a>
+          <a href="https://pahukama.com" target="_blank" rel="noopener noreferrer" class="hover:text-sage dark:hover:text-sageLight transition-colors">
+            pahukama.com &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-paperBorder/60 dark:border-charcoalBorder/60 flex flex-col sm:flex-row gap-2 items-center justify-between font-mono text-[11px] text-inkMuted dark:text-boneMuted text-center sm:text-left">
+        <span>&copy; <span id="year">2026</span> Thabani Chibanda &middot; Albuquerque, NM</span>
+        <span>Set in Newsreader, Plus Jakarta Sans &amp; JetBrains Mono</span>
+        <span>Frameworkless static site &middot; No trackers</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

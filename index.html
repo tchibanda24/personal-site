@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thabani Chibanda — Engineering Notebook</title>
+  <meta name="description"
+    content="A personal technical journal: systems notes, TypeScript and OCaml, working principles, and the occasional letter.">
+  <meta property="og:title" content="Thabani Chibanda — Engineering Notebook">
+  <meta property="og:description"
+    content="Notes from a working engineer on backends, frontends, types, and how systems earn their keep.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfaf6">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#171614">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23fcfaf6'/><text x='32' y='44' font-family='Georgia,serif' font-size='36' font-style='italic' text-anchor='middle' fill='%2324543f'>T</text></svg>">
+
+  <!-- Early Theme Detection (prevents flash of white/black during load) -->
+  <script>
+    (function () {
+      var stored = null;
+      try {stored = localStorage.getItem('theme');} catch (e) { }
+      var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.classList.toggle('dark', dark);
+      document.documentElement.classList.toggle('light', !dark);
+    })();
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            paper: '#fcfaf6',
+            paperCard: '#f5f1e8',
+            paperBorder: '#cebe9d',
+            ink: '#141311',
+            inkMuted: '#3d3933',
+            terracotta: '#943f24',
+            terracottaLight: '#d89476',
+            sage: '#24543f',
+            sageLight: '#97c7a9',
+            charcoal: '#171614',
+            charcoalCard: '#1f1d1a',
+            charcoalBorder: '#3f3b34',
+            bone: '#f2eee5',
+            boneMuted: '#c5bdb0'
+          },
+          fontFamily: {
+            serif: ['Newsreader', 'Georgia', 'Cambria', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts for Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Modular Custom Stylesheet -->
+  <link rel="stylesheet" href="./css/styles.css">
+
+  <!-- Frameworkless JavaScript Logic -->
+  <script src="./js/app.js" defer></script>
+</head>
+
+<body
+  class="bg-paper text-ink dark:bg-charcoal dark:text-bone min-h-screen font-sans selection:bg-sage selection:text-paper dark:selection:bg-sageLight dark:selection:text-charcoal transition-colors">
+
+  <a href="#main"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-paperCard dark:focus:bg-charcoalCard focus:border focus:border-sage dark:focus:border-sageLight focus:px-3 focus:py-2 focus:rounded font-mono text-xs">
+    Skip to content
+  </a>
+
+  <!-- Header / Navigation -->
+  <header
+    class="sticky top-0 z-40 border-b border-paperBorder dark:border-charcoalBorder bg-paper/95 dark:bg-charcoal/95 backdrop-blur-none px-4 sm:px-6 py-3.5 sm:py-4">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 sm:gap-3">
+      <div class="flex items-center justify-between">
+        <a href="./"
+          class="font-serif italic text-xl font-medium tracking-tight text-ink dark:text-bone hover:text-sage dark:hover:text-sageLight transition-colors">
+          Thabani Chibanda
+        </a>
+
+        <button onclick="toggleTheme()" type="button" aria-label="Toggle color theme"
+          class="sm:hidden font-mono text-xs text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors px-2 py-1 rounded border border-paperBorder dark:border-charcoalBorder"
+          title="Toggle theme">
+          <span id="themeLabelMobile">Dark</span>
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between sm:justify-end space-x-5 overflow-x-auto scrollbar-none py-0.5">
+        <nav class="flex items-center space-x-4 sm:space-x-6 font-mono text-xs whitespace-nowrap"
+          aria-label="Main Navigation">
+          <a href="./" id="nav-overview"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Overview
+          </a>
+          <a href="./principles.html" id="nav-principles"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Principles
+          </a>
+          <a href="./essays.html" id="nav-essays"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Essays
+          </a>
+          <a href="./canon.html" id="nav-canon"
+            class="nav-link text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
+            Canon
+          </a>
+        </nav>
+
+        <button onclick="toggleTheme()" type="button" aria-label="Toggle color theme"
+          class="hidden sm:inline-block font-mono text-xs text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors pl-2"
+          title="Toggle theme">
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main id="main" class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16 sm:space-y-20">
+
+    <section class="space-y-7">
+      <div class="flex flex-col-reverse sm:flex-row sm:items-start sm:justify-between gap-6">
+        <div class="space-y-2.5 flex-1">
+          <p class="font-mono text-xs text-sage dark:text-sageLight tracking-wide uppercase">
+            Albuquerque, NM · Lead Engineer &amp; Principal Architect
+          </p>
+          <h1
+            class="font-serif text-2xl sm:text-4xl lg:text-[2.75rem] font-normal text-ink dark:text-bone leading-tight">
+            Software Engineer &amp; System Architect
+          </h1>
+          <p class="font-serif italic text-lg sm:text-xl text-inkMuted dark:text-boneMuted">
+            A personal technical journal from <a href="https://pahukama.com" target="_blank" rel="noopener noreferrer"
+              class="underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">pahukama.com</a>:
+            systems I have shipped, notes I keep, and the occasional letter.
+          </p>
+        </div>
+
+        <div
+          class="editorial-portrait-frame shrink-0 self-start p-1 rounded-md border border-paperBorder dark:border-charcoalBorder bg-paperCard dark:bg-charcoalCard shadow-xs">
+          <img src="./me.jpg" alt="Portrait of Thabani Chibanda"
+            class="editorial-portrait block w-24 h-24 sm:w-28 sm:h-28 aspect-square object-cover rounded" width="112"
+            height="112" />
+        </div>
+      </div>
+
+      <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-4">
+        <p>
+          This site is a working notebook, not a manifesto. I write here to keep a record of systems I have
+          actually shipped, the trade-offs I would make again, and the ones I would not. The through-line is
+          practical: technical choices should earn their keep — in cost, in operability, and in how clearly a
+          small team can hold the whole system in their head.
+        </p>
+        <p>
+          I have built software at Amazon Prime Video, Express Scripts, and smaller companies. Day to day that
+          looks like OCaml and TypeScript, Vue and React on the client, embedded analytics instead of idle
+          warehouses, and enough structure that a new engineer can run the product locally without a tour of
+          twelve services.
+        </p>
+      </div>
+
+      <p class="font-sans text-sm text-inkMuted dark:text-boneMuted">
+        Currently lead engineer &amp; principal system architect at <a href="https://pahukama.com" target="_blank"
+          rel="noopener noreferrer"
+          class="font-medium text-ink dark:text-bone underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">pahukama.com</a>.
+      </p>
+
+      <!-- Technical Telemetry / System Status Micro-strip -->
+      <div
+        class="border border-paperBorder dark:border-charcoalBorder bg-paperCard/50 dark:bg-charcoalCard/50 rounded px-3.5 py-2 flex flex-wrap items-center justify-between gap-y-2 font-mono text-[11px] text-inkMuted dark:text-boneMuted">
+        <div class="flex items-center space-x-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-600 dark:bg-emerald-400 animate-pulse"
+            aria-hidden="true"></span>
+          <span class="text-ink dark:text-bone font-medium">SYS.STATUS: <span
+              class="text-sage dark:text-sageLight">ONLINE</span></span>
+          <span class="text-paperBorder dark:text-charcoalBorder">|</span>
+          <span>STACK: OCaml · TypeScript · Vue · React · DuckDB · HTMX · AWS</span>
+        </div>
+        <div class="flex items-center space-x-3 text-[10px]">
+          <span>ALLOC: 0 runtime daemons</span>
+          <span class="text-paperBorder dark:text-charcoalBorder">|</span>
+          <span>SSR: idempotent @ edge</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-7 gap-y-2 font-mono text-xs pt-2">
+        <button onclick="copyEmail()" id="emailBtn" type="button"
+          class="text-ink dark:text-bone underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
+          <span id="emailText">thabani.chibanda@pahukama.com</span>
+        </button>
+
+        <a href="./ThabaniChibandaResume_.pdf" target="_blank" rel="noopener noreferrer"
+          class="text-ink dark:text-bone underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
+          Resume (PDF)
+        </a>
+
+        <a href="./principles.html"
+          class="text-inkMuted dark:text-boneMuted hover:text-sage dark:hover:text-sageLight transition-colors">
+          Operating principles &rarr;
+        </a>
+
+        <a href="./essays.html"
+          class="text-inkMuted dark:text-boneMuted hover:text-sage dark:hover:text-sageLight transition-colors">
+          Essays &amp; criticism &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured Essay / Field Notes -->
+    <section class="space-y-6">
+      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2.5 flex items-baseline justify-between">
+        <h2 class="font-serif text-2xl sm:text-[1.75rem] font-normal text-ink dark:text-bone">
+          Field notes
+        </h2>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">featured</span>
+      </div>
+
+      <article class="space-y-5">
+        <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
+          <span>Lead reflection</span>
+          <span>2026-02</span>
+        </div>
+        <h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-bone">
+          On unikernels, MirageOS &amp; the limits of optimization
+        </h3>
+
+        <blockquote class="editorial-quote">
+          "We can only see a short distance ahead, but we can see plenty there that needs to be done."
+          <footer class="font-mono not-italic text-xs text-sage dark:text-sageLight mt-2">— Alan Turing</footer>
+        </blockquote>
+
+        <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-4">
+          <p class="dropcap">
+            Unikernels are a clean idea: compile type-safe OCaml into a single-purpose image, drop the unused
+            POSIX user-space, and boot in microseconds. I still like that discipline. It taught me to ask what
+            a process is actually for before wrapping it in another runtime.
+          </p>
+          <p>
+            In production, isolation is only half the work. Networks partition, nodes disappear, and writes
+            disagree. Spending weeks shaving kilobytes off a binary while leaving service boundaries brittle
+            is just optimization theater.
+          </p>
+          <p>
+            What I keep from that unikernel work is module parameterization: domain logic stays independent
+            of I/O drivers. The rest is ordinary hygiene — bounded retries, explicit compensations, and
+            designing for partial failure from the start. In pahukama.com's <strong>Ariadne</strong> kernel,
+            that split is the part that has held up.
+          </p>
+        </div>
+
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-4 grid sm:grid-cols-2 gap-4">
+          <a href="./essays.html#can-poetry-matter"
+            class="group block p-4 rounded border border-paperBorder dark:border-charcoalBorder bg-paperCard/60 dark:bg-charcoalCard/60 hover:border-sage dark:hover:border-sageLight transition-colors">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-terracotta dark:text-terracottaLight">
+              Literature &amp; criticism
+            </span>
+            <p
+              class="font-serif text-lg text-ink dark:text-bone mt-1 group-hover:text-sage dark:group-hover:text-sageLight transition-colors">
+              Can Poetry Matter? (Is Coding Dead?) &rarr;
+            </p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Why neither poetry nor hand-written code is dead: on Wilson, Gioia, Schreiber, and deliberate craft.
+            </p>
+          </a>
+
+          <a href="./essays.html#frugal-ledger"
+            class="group block p-4 rounded border border-paperBorder dark:border-charcoalBorder bg-paperCard/60 dark:bg-charcoalCard/60 hover:border-sage dark:hover:border-sageLight transition-colors">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-sage dark:text-sageLight">
+              Systems &amp; economics
+            </span>
+            <p
+              class="font-serif text-lg text-ink dark:text-bone mt-1 group-hover:text-sage dark:group-hover:text-sageLight transition-colors">
+              The frugal architect's ledger &amp; 4 more essays &rarr;
+            </p>
+            <p class="font-sans text-xs text-inkMuted dark:text-boneMuted mt-1 leading-relaxed">
+              Five-point treatments on DuckDB lakehouses, functional DDD, native Sagas, and apprenticeship.
+            </p>
+          </a>
+        </div>
+      </article>
+    </section>
+
+    <!-- Systems in Production -->
+    <section class="space-y-6">
+      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2.5 flex items-baseline justify-between">
+        <h2 class="font-serif text-2xl sm:text-[1.75rem] font-normal text-ink dark:text-bone">
+          Systems in production
+        </h2>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted"><a href="https://pahukama.com" target="_blank"
+            rel="noopener noreferrer"
+            class="hover:text-sage dark:hover:text-sageLight transition-colors">pahukama.com</a> &amp; Ariadne
+          framework</span>
+      </div>
+
+      <div class="space-y-10">
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-3.5">
+          <div class="space-y-1">
+            <h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-bone">Modular monolith &amp;
+              distributed saga engine</h3>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">OCaml · Ariadne framework · domain-driven
+              design</p>
+          </div>
+          <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+            <p><strong class="text-ink dark:text-bone">Context.</strong> Built for pahukama.com on top of our custom
+              <strong>Ariadne</strong> framework to handle multi-step e-commerce orders. An external workflow
+              orchestrator would have been the default; we did not need one yet.
+            </p>
+            <p><strong class="text-ink dark:text-bone">Design.</strong> Domain boundaries stay modular inside an OCaml
+              functor-parameterized kernel. An asynchronous in-memory bus coordinates multi-step transactions paired
+              with explicit backward compensations, so retries stay idempotent across flaky network calls without a
+              distributed lock service.</p>
+            <!-- OCaml Architectural Signature -->
+            <div
+              class="code-window bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder p-3 my-2 text-ink dark:text-bone">
+              <span class="text-inkMuted dark:text-boneMuted">(* Ariadne core: Functor-parameterized saga step
+                *)</span><br>
+              <span class="text-sage dark:text-sageLight">module Make_Saga</span> (Tx : TRANSACTION_STORE) (Bus :
+              IN_MEMORY_BUS) = <span class="text-terracotta dark:text-terracottaLight">struct</span><br>
+              &nbsp;&nbsp;<span class="text-sage dark:text-sageLight">val</span> execute : order_intent -&gt; (unit,
+              domain_error) result Lwt.t<br>
+              &nbsp;&nbsp;<span class="text-sage dark:text-sageLight">val</span> compensate : order_id -&gt; reason
+              -&gt; unit Lwt.t<br>
+              <span class="text-terracotta dark:text-terracottaLight">end</span>
+            </div>
+
+            <p><strong class="text-ink dark:text-bone">Outcome.</strong> Live in production serving customers with
+              zero external orchestration runtimes or background daemon maintenance. Multi-step transactions and
+              failure boundaries hold at compile time, eliminating the retreads that usually eat a small team's
+              roadmap once real traffic arrives.</p>
+            <p><strong class="text-ink dark:text-bone">Trade-off.</strong> OCaml and strict functor boundaries take
+              more upfront thought than reaching for a looser dynamic stack, and every compensation is still a code
+              path we must design and verify ourselves. We pay that cost once up front to gain stable abstractions
+              we do not have to keep rewriting, and no external workflow engine to debug at 3 a.m.</p>
+          </div>
+        </article>
+
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-3.5">
+          <div class="space-y-1">
+            <h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-bone">Embedded analytics, real-time
+              observability &amp; zero-copy lakehouse</h3>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">DuckDB · AWS S3 Parquet · Real-time Telemetry
+              · Frugal Architecture</p>
+          </div>
+          <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+            <p><strong class="text-ink dark:text-bone">Context.</strong> It is easy to split the data stack into two
+              idle bills: a metrics SaaS for live operations and a warehouse for historical reporting, both running
+              whether anyone is looking.
+            </p>
+            <p><strong class="text-ink dark:text-bone">Design.</strong> Ariadne keeps both jobs in one footprint. An
+              in-memory telemetry ring covers live health and anomaly detection; structured events flush
+              asynchronously to Parquet on S3. Historical aggregations run as in-process SQL through an embedded
+              DuckDB worker.</p>
+            <!-- In-process DuckDB Telemetry snippet -->
+            <div
+              class="code-window bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder p-3 my-2 text-ink dark:text-bone">
+              <span class="text-inkMuted dark:text-boneMuted">-- Zero-copy S3 Parquet query execution via embedded
+                runtime</span><br>
+              <span class="text-terracotta dark:text-terracottaLight">SELECT</span> date_trunc(<span
+                class="text-sage dark:text-sageLight">'day'</span>, event_time) <span
+                class="text-terracotta dark:text-terracottaLight">AS</span> bucket, count(1) <span
+                class="text-terracotta dark:text-terracottaLight">AS</span> tx_count<br>
+              <span class="text-terracotta dark:text-terracottaLight">FROM</span> read_parquet(<span
+                class="text-sage dark:text-sageLight">'s3://pahukama-telemetry/events/*/*.parquet'</span>)<br>
+              <span class="text-terracotta dark:text-terracottaLight">GROUP BY</span> 1 <span
+                class="text-terracotta dark:text-terracottaLight">ORDER BY</span> 1 <span
+                class="text-terracotta dark:text-terracottaLight">DESC LIMIT</span> 30; <span
+                class="text-inkMuted dark:text-boneMuted">-- p50: ~140ms</span>
+            </div>
+
+            <p><strong class="text-ink dark:text-bone">Outcome.</strong> Immediate, live operational observability
+              paired with sub-second CRM analytical querying across historical datasets at near-zero recurring idle
+              spend, sidestepping third-party monitoring subscriptions and cluster leases.</p>
+            <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Analytical aggregations and live telemetry
+              share the
+              host's memory envelope. We bound ring buffer capacities, queue analytical queries deterministically, and
+              accept
+              occasional S3 cold-fetch variance in exchange for deleting redundant data infrastructure.</p>
+          </div>
+        </article>
+
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-3.5">
+          <div class="space-y-1">
+            <h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-bone">Resilient projections &amp;
+              reactive state idempotency</h3>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">HTMX · Asynchronous FRP principles ·
+              server-side rendering</p>
+          </div>
+          <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+            <p><strong class="text-ink dark:text-bone">Context.</strong> Some surfaces do not need a client-side state
+              machine. We wanted to avoid hydrating a second copy of the world in the browser just to submit a form.
+            </p>
+            <p><strong class="text-ink dark:text-bone">Design.</strong> For those flows, Ariadne serves HTML fragments
+              and lets HTMX swap them in place, with token-backed deduplication so retries do not double-submit.
+              Interactions are just requests; the server remains the source of truth.</p>
+            <p><strong class="text-ink dark:text-bone">Outcome.</strong> A single source of truth on the server, zero
+              hydration bugs, and mutations rendered idempotent right at the edge without callback cascades.</p>
+            <p><strong class="text-ink dark:text-bone">Trade-off.</strong> User interactions pay a server round-trip. We
+              accept that latency on these flows in exchange for deleting a client-side synchronization layer. Other
+              product surfaces still need a real frontend — that is the TypeScript work below.</p>
+          </div>
+        </article>
+
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-3.5">
+          <div class="space-y-1">
+            <h3 class="font-serif text-xl sm:text-2xl font-normal text-ink dark:text-bone">Modular analytics shell in
+              TypeScript (Vue &amp; React)</h3>
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">TypeScript · Vue · React · Domain-tailored
+              analytics</p>
+          </div>
+          <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+            <p><strong class="text-ink dark:text-bone">Context.</strong> Analytics reporting, streaming metric
+              dashboards, and interactive ledger exploration place fundamentally different demands on the client.
+              Forcing every visualization problem into a single front-end toolchain creates poor compromises across
+              reactivity, charting ecosystems, and rendering performance.</p>
+            <p><strong class="text-ink dark:text-bone">Design.</strong> A typed microfrontend shell coordinates
+              analytics modules as isolated domain islands. Vue handles fast, lightweight operational metrics and
+              form-heavy filter panels, while React powers complex chart exploration and state-heavy graph canvases.
+              The host shell provides session, theme tokens, and streaming telemetry channels over typed contracts,
+              freeing each analytics domain to pick the best renderer for its problem.</p>
+            <div
+              class="code-window bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder p-3 my-2 text-ink dark:text-bone">
+              <span class="text-inkMuted dark:text-boneMuted">// Shell contract: modular analytics islands bound by
+                domain data channels</span><br>
+              <span class="text-sage dark:text-sageLight">type</span> IslandHost&lt;TParams = Record&lt;<span
+                class="text-sage dark:text-sageLight">string</span>, <span
+                class="text-sage dark:text-sageLight">unknown</span>&gt;&gt; = {<br>
+              &nbsp;&nbsp;mount: (el: HTMLElement, ctx: AnalyticsCtx&lt;TParams&gt;) =&gt; () =&gt; <span
+                class="text-terracotta dark:text-terracottaLight">void</span><br>
+              }<br>
+              <span class="text-sage dark:text-sageLight">type</span> AnalyticsWorkspace = Record&lt;DomainViewId,
+              IslandHost&gt;
+            </div>
+            <p><strong class="text-ink dark:text-bone">Outcome.</strong> Analytics surfaces match their specific
+              computational and rendering requirements rather than being forced into a lowest-common-denominator
+              stack. Engineers can optimize or refactor an individual reporting view without risking operational
+              dashboards.</p>
+            <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Multiple view libraries in the bundle
+              require strict shell code-splitting and asset loading discipline. Contract changes between the shell's
+              data stream and the islands must stay versioned and backward compatible.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Career Track -->
+    <section class="space-y-6">
+      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2.5 flex items-baseline justify-between">
+        <h2 class="font-serif text-2xl sm:text-[1.75rem] font-normal text-ink dark:text-bone">
+          Career track
+        </h2>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">2019 – present</span>
+      </div>
+
+      <div class="space-y-7">
+        <div class="sm:grid sm:grid-cols-[8.5rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2023 – present</p>
+          <div class="space-y-1.5">
+            <p class="font-serif text-lg sm:text-xl leading-snug text-ink dark:text-bone">
+              <a href="https://pahukama.com" target="_blank" rel="noopener noreferrer"
+                class="underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">pahukama.com</a>
+              <span class="text-inkMuted dark:text-boneMuted">· Lead Engineer &amp; Principal System
+                Architect, Remote</span>
+            </p>
+            <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
+              Architected an OCaml modular monolith, a Saga orchestration engine, a DuckDB Parquet lakehouse, and a
+              TypeScript modular analytics microfrontend spanning Vue and React. Leads and mentors a team of 3
+              engineers across system design RFCs and typed releases.
+            </p>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-[8.5rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2023</p>
+          <div class="space-y-1.5">
+            <p class="font-serif text-lg sm:text-xl leading-snug text-ink dark:text-bone">
+              thatDot <span class="text-inkMuted dark:text-boneMuted">· Software Engineer (Contract), Portland,
+                OR</span>
+            </p>
+            <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
+              Spearheaded end-to-end technical strategy and architecture for a real-time graph streaming insights
+              platform from conception to production MVP. Refactored core Scala streaming APIs for a React dashboard.
+            </p>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-[8.5rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2021 – 2023</p>
+          <div class="space-y-1.5">
+            <p class="font-serif text-lg sm:text-xl leading-snug text-ink dark:text-bone">
+              Amazon (Prime Video) <span class="text-inkMuted dark:text-boneMuted">· Software Development Engineer,
+                Seattle, WA</span>
+            </p>
+            <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
+              Built and operated high-throughput cloud telemetry services across global Prime Video mobile clients.
+              Designed automated ML log clustering pipelines for anomaly triage, compressing mean time to detection
+              across iOS and Android regressions.
+            </p>
+          </div>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-[8.5rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2020</p>
+          <p class="font-serif text-lg sm:text-xl leading-snug text-ink dark:text-bone">
+            Event Dynamic (now Tillion) <span class="text-inkMuted dark:text-boneMuted">· Full Stack Software
+              Developer, Dallas, TX</span>
+          </p>
+        </div>
+
+        <div class="sm:grid sm:grid-cols-[8.5rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2019 – 2020</p>
+          <p class="font-serif text-lg sm:text-xl leading-snug text-ink dark:text-bone">
+            Express Scripts <span class="text-inkMuted dark:text-boneMuted">· Full Stack Developer (Contract), St.
+              Louis, MO</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Descartes Quote -->
+    <section class="py-8 text-center space-y-3">
+      <div class="w-10 h-px bg-sage/60 dark:bg-sageLight/60 mx-auto" aria-hidden="true"></div>
+      <p class="font-serif italic text-xl sm:text-2xl text-ink dark:text-bone leading-relaxed max-w-xl mx-auto">
+        "It is not enough to have a good mind; the main thing is to use it well."
+      </p>
+      <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— René Descartes, Discourse on the Method</p>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-paperBorder dark:border-charcoalBorder py-8 sm:py-10 px-4 sm:px-6 mt-12 sm:mt-16">
+    <div class="max-w-5xl mx-auto space-y-6">
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-inkMuted dark:text-boneMuted">
+        <nav aria-label="Footer Navigation"
+          class="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-2">
+          <a href="./" class="hover:text-ink dark:hover:text-bone transition-colors">Overview</a>
+          <a href="./principles.html" class="hover:text-ink dark:hover:text-bone transition-colors">Principles</a>
+          <a href="./essays.html" class="hover:text-ink dark:hover:text-bone transition-colors">Essays</a>
+          <a href="./canon.html" class="hover:text-ink dark:hover:text-bone transition-colors">Canon</a>
+        </nav>
+        <div class="flex flex-wrap items-center justify-center sm:justify-end gap-x-5 gap-y-2">
+          <button onclick="copyEmail()" type="button"
+            class="underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
+            Email
+          </button>
+          <a href="./ThabaniChibandaResume_.pdf" target="_blank" rel="noopener noreferrer"
+            class="hover:text-ink dark:hover:text-bone transition-colors">
+            Resume (PDF)
+          </a>
+          <a href="https://pahukama.com" target="_blank" rel="noopener noreferrer"
+            class="hover:text-sage dark:hover:text-sageLight transition-colors">
+            pahukama.com &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="pt-4 border-t border-paperBorder/60 dark:border-charcoalBorder/60 flex flex-col sm:flex-row gap-2 items-center justify-between font-mono text-[11px] text-inkMuted dark:text-boneMuted text-center sm:text-left">
+        <span>&copy; <span id="year">2026</span> Thabani Chibanda &middot; Albuquerque, NM</span>
+        <span>Set in Newsreader, Plus Jakarta Sans &amp; JetBrains Mono</span>
+        <span>Frameworkless static site &middot; No trackers</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
