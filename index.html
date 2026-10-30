@@ -19,7 +19,7 @@
   <script>
     (function () {
       var stored = null;
-      try { stored = localStorage.getItem('theme'); } catch (e) {}
+      try {stored = localStorage.getItem('theme');} catch (e) { }
       var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
       document.documentElement.classList.toggle('dark', dark);
       document.documentElement.classList.toggle('light', !dark);
@@ -202,10 +202,12 @@
             compress cloud run-rates, accelerate delivery cycles, and protect engineering teams from burnout.
           </p>
           <p>
-            Having engineered systems across high-scale enterprise environments (Amazon Prime Video, Express Scripts) and
+            Having engineered systems across high-scale enterprise environments (Amazon Prime Video, Express Scripts)
+            and
             lean startups, I champion the discipline that <em>"slow is smooth, and smooth is fast."</em> We build with
             rigor—using OCaml to mathematically enforce business rules at compile time, running zero-copy embedded
-            analytics to sidestep heavy cloud data warehouses, and fostering an apprenticeship culture where engineers learn
+            analytics to sidestep heavy cloud data warehouses, and fostering an apprenticeship culture where engineers
+            learn
             to master complexity through hands-on collaboration.
           </p>
         </div>
@@ -265,7 +267,8 @@
               with a negligible RAM footprint.
             </p>
             <p>
-              However, sound engineering requires resisting the temptation of pure technical fetishism. It is easy to fall
+              However, sound engineering requires resisting the temptation of pure technical fetishism. It is easy to
+              fall
               into the trap of "optimization monkey coding"—spending weeks shaving kilobytes off a binary or
               micro-optimizing execution paths when the primary bottleneck is human comprehension or business context
               alignment.
@@ -273,7 +276,8 @@
             <p>
               Unikernels are a masterclass in radical minimalism. But in production, radical ideas must earn their keep.
               We choose OCaml and modular monoliths not because they are academically pure, but because they enforce
-              strict type safety and domain boundaries while keeping total operational cognitive load low for a lean team.
+              strict type safety and domain boundaries while keeping total operational cognitive load low for a lean
+              team.
             </p>
           </div>
 
@@ -300,42 +304,61 @@
           <!-- Case Study 1 -->
           <article class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-3">
             <div class="space-y-1">
-              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Modular monolith &amp; distributed saga engine</h3>
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Modular monolith &amp; distributed saga
+                engine</h3>
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">OCaml · domain-driven design</p>
             </div>
             <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
-              <p><strong class="text-ink dark:text-bone">Context.</strong> Built for pahukama.com to handle distributed e-commerce transactions without relying on heavy third-party workflow orchestrators.</p>
-              <p><strong class="text-ink dark:text-bone">Design.</strong> Asynchronous messaging bus with explicit compensation logic, short-lived JWT tokens, and database TTL bounds to enforce idempotency across intermittent networks.</p>
-              <p><strong class="text-ink dark:text-bone">Outcome.</strong> Zero orchestrator daemon overhead; processed 500+ transactions with fault tolerance built directly into OCaml's static type system.</p>
-              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Every compensation is a code path we must design and test ourselves; the framework gives nothing for free. In exchange, there is no extra infrastructure to operate at 3 a.m.</p>
+              <p><strong class="text-ink dark:text-bone">Context.</strong> Built for pahukama.com to handle distributed
+                e-commerce transactions without relying on heavy third-party workflow orchestrators.</p>
+              <p><strong class="text-ink dark:text-bone">Design.</strong> Asynchronous messaging bus with explicit
+                compensation logic, short-lived JWT tokens, and database TTL bounds to enforce idempotency across
+                intermittent networks.</p>
+              <p><strong class="text-ink dark:text-bone">Outcome.</strong> Zero orchestrator daemon overhead; processed
+                500+ transactions with fault tolerance built directly into OCaml's static type system.</p>
+              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Every compensation is a code path we must
+                design and test ourselves; the framework gives nothing for free. In exchange, there is no extra
+                infrastructure to operate at 3 a.m.</p>
             </div>
           </article>
 
           <!-- Case Study 2 -->
           <article class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-3">
             <div class="space-y-1">
-              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Embedded analytics &amp; zero-copy lakehouse</h3>
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Embedded analytics &amp; zero-copy
+                lakehouse</h3>
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">DuckDB · AWS S3</p>
             </div>
             <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
-              <p><strong class="text-ink dark:text-bone">Context.</strong> E-commerce analytics often suffer from expensive warehouse costs (Snowflake/Redshift) during idle periods.</p>
-              <p><strong class="text-ink dark:text-bone">Design.</strong> Streamed event logs directly as Parquet files to AWS S3, executing zero-copy in-memory SQL queries via embedded DuckDB instance within the backend runtime.</p>
-              <p><strong class="text-ink dark:text-bone">Outcome.</strong> Sub-second CRM analytical queries at near-zero recurring infrastructure cost.</p>
-              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Analytical queries share the backend's memory envelope. We bound concurrency and accept S3 cold-start latency in exchange for zero idle warehouse spend.</p>
+              <p><strong class="text-ink dark:text-bone">Context.</strong> E-commerce analytics often suffer from
+                expensive warehouse costs (Snowflake/Redshift) during idle periods.</p>
+              <p><strong class="text-ink dark:text-bone">Design.</strong> Streamed event logs directly as Parquet files
+                to AWS S3, executing zero-copy in-memory SQL queries via embedded DuckDB instance within the backend
+                runtime.</p>
+              <p><strong class="text-ink dark:text-bone">Outcome.</strong> Sub-second CRM analytical queries at
+                near-zero recurring infrastructure cost.</p>
+              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Analytical queries share the backend's
+                memory envelope. We bound concurrency and accept S3 cold-start latency in exchange for zero idle
+                warehouse spend.</p>
             </div>
           </article>
 
           <!-- Case Study 3 -->
           <article class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-3">
             <div class="space-y-1">
-              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Resilient projections &amp; state idempotency</h3>
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Resilient projections &amp; state
+                idempotency</h3>
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">HTMX · server-side rendering</p>
             </div>
             <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
-              <p><strong class="text-ink dark:text-bone">Context.</strong> Eliminating client-side SPA state divergence and heavy JavaScript bundles.</p>
-              <p><strong class="text-ink dark:text-bone">Design.</strong> Server-side rendered HTML fragments coupled with HTMX for declarative DOM updates, protected by token-backed request deduplication.</p>
-              <p><strong class="text-ink dark:text-bone">Outcome.</strong> One language on the server, no hydration bugs, mutations rendered idempotent at the edge.</p>
-              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Interactions pay a server round-trip; we accept ~80 ms p50 latency in exchange for deleting an entire client-side state layer.</p>
+              <p><strong class="text-ink dark:text-bone">Context.</strong> Eliminating client-side SPA state divergence
+                and heavy JavaScript bundles.</p>
+              <p><strong class="text-ink dark:text-bone">Design.</strong> Server-side rendered HTML fragments coupled
+                with HTMX for declarative DOM updates, protected by token-backed request deduplication.</p>
+              <p><strong class="text-ink dark:text-bone">Outcome.</strong> One language on the server, no hydration
+                bugs, mutations rendered idempotent at the edge.</p>
+              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Interactions pay a server round-trip; we
+                accept ~80 ms p50 latency in exchange for deleting an entire client-side state layer.</p>
             </div>
           </article>
 
@@ -357,11 +380,14 @@
             <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2023 – present</p>
             <div class="space-y-1.5">
               <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
-                pahukama.com <span class="text-inkMuted dark:text-boneMuted">— Lead Engineer &amp; Principal System Architect, Remote</span>
+                pahukama.com <span class="text-inkMuted dark:text-boneMuted">— Lead Engineer &amp; Principal System
+                  Architect, Remote</span>
               </p>
               <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
-                Architected OCaml DDD modular monolith, custom Saga engine, and DuckDB analytics lakehouse. Leads and mentors
-                a high-trust team of 3 engineers via collaborative apprenticeship, architectural RFCs, and type-safe invariants.
+                Architected OCaml DDD modular monolith, custom Saga engine, and DuckDB analytics lakehouse. Leads and
+                mentors
+                a high-trust team of 3 engineers via collaborative apprenticeship, architectural RFCs, and type-safe
+                invariants.
               </p>
             </div>
           </div>
@@ -371,10 +397,12 @@
             <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2023</p>
             <div class="space-y-1.5">
               <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
-                thatDot <span class="text-inkMuted dark:text-boneMuted">— Senior Software Engineer (Contract), Portland, OR</span>
+                thatDot <span class="text-inkMuted dark:text-boneMuted">— Senior Software Engineer (Contract), Portland,
+                  OR</span>
               </p>
               <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
-                Spearheaded technical strategy and frontend/backend integration for real-time graph data platform. Refactored streaming Scala backend APIs.
+                Spearheaded technical strategy and frontend/backend integration for real-time graph data platform.
+                Refactored streaming Scala backend APIs.
               </p>
             </div>
           </div>
@@ -384,10 +412,12 @@
             <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2021 – 2023</p>
             <div class="space-y-1.5">
               <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
-                Amazon (Prime Video) <span class="text-inkMuted dark:text-boneMuted">— Software Development Engineer II, Seattle, WA</span>
+                Amazon (Prime Video) <span class="text-inkMuted dark:text-boneMuted">— Software Development Engineer II,
+                  Seattle, WA</span>
               </p>
               <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
-                Built high-throughput cloud services for testing telemetry. Designed automated ML log clustering pipelines for regression triage across iOS and Android client platforms.
+                Built high-throughput cloud services for testing telemetry. Designed automated ML log clustering
+                pipelines for regression triage across iOS and Android client platforms.
               </p>
             </div>
           </div>
@@ -396,7 +426,8 @@
           <div class="sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
             <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2020</p>
             <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
-              Event Dynamic (now Tillion) <span class="text-inkMuted dark:text-boneMuted">— Full Stack Software Developer, Dallas, TX</span>
+              Event Dynamic (now Tillion) <span class="text-inkMuted dark:text-boneMuted">— Full Stack Software
+                Developer, Dallas, TX</span>
             </p>
           </div>
 
@@ -404,7 +435,8 @@
           <div class="sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
             <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2019 – 2020</p>
             <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
-              Express Scripts <span class="text-inkMuted dark:text-boneMuted">— Full Stack Developer (Contract), St. Louis, MO</span>
+              Express Scripts <span class="text-inkMuted dark:text-boneMuted">— Full Stack Developer (Contract), St.
+                Louis, MO</span>
             </p>
           </div>
         </div>
@@ -436,103 +468,156 @@
       <!-- Introduction to the Principles Manifesto -->
       <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
         <p>
-          Anyone can make a software system complicated. Adding another microservice, message broker, or generic abstraction
-          layer is the path of least resistance. 
-          <strong>Simplicity is the hardest discipline in software engineering.</strong> It requires ruthlessly interrogating assumptions, understanding commercial unit economics, refusing speculative complexity, and teaching teams to master system fundamentals.
+          Anyone can make a software system complicated. Adding another microservice, message broker, or generic
+          abstraction
+          layer is the path of least resistance.
+          <strong>Simplicity is the hardest discipline in software engineering.</strong> It requires ruthlessly
+          interrogating assumptions, understanding commercial unit economics, refusing speculative complexity, and
+          teaching teams to master system fundamentals.
         </p>
         <p>
-          These principles form the operating framework for how we engineer platforms, allocate capital, and mentor teams at pahukama.com.
+          These principles form the operating framework for how we engineer platforms, allocate capital, and mentor
+          teams at pahukama.com.
         </p>
       </div>
 
       <div class="space-y-6">
         <!-- Principle I: Methodological Reduction (Descartes) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">I · Methodological reduction — René Descartes (1637)</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Strip inherited dogma to undeniable first principles</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">I · Methodological reduction — René Descartes
+            (1637)</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Strip inherited dogma to undeniable first
+            principles</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Never adopt an architectural pattern because an industry consensus decreed it. Reject the default sprawl of microservices, distributed coordinators, and managed clusters until your domain proves vertical exhaustion. Divide each problem into as many parts as necessary to resolve it cleanly, and verify every interface boundary with unyielding skepticism.
+            Never adopt an architectural pattern because an industry consensus decreed it. Reject the default sprawl of
+            microservices, distributed coordinators, and managed clusters until your domain proves vertical exhaustion.
+            Divide each problem into as many parts as necessary to resolve it cleanly, and verify every interface
+            boundary with unyielding skepticism.
           </p>
         </div>
 
         <!-- Principle II: Mathematical Boundary Defense (Sipser / Turing) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">II · Mathematical boundary defense — Michael Sipser / Alan Turing</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Make illegal states unrepresentable at compile time</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">II · Mathematical boundary defense — Michael
+            Sipser / Alan Turing</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Make illegal states unrepresentable at
+            compile time</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            State transitions must mirror formal state machines. Algebraic Data Types (ADTs) and expressive type systems should police domain invariants so that invalid business states fail at compilation rather than generating cryptic 3 a.m. runtime panics. Formal correctness is not academic pedantry; it is the ultimate lever of engineering velocity.
+            State transitions must mirror formal state machines. Algebraic Data Types (ADTs) and expressive type systems
+            should police domain invariants so that invalid business states fail at compilation rather than generating
+            cryptic 3 a.m. runtime panics. Formal correctness is not academic pedantry; it is the ultimate lever of
+            engineering velocity.
           </p>
         </div>
 
         <!-- Principle III: Frugal Engineering & Capital Allocation (Vogels / Buffett) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">III · Frugal engineering &amp; unit economics — Werner Vogels / Warren Buffett</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Cost &amp; tail-latency are core non-functional requirements</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">III · Frugal engineering &amp; unit economics —
+            Werner Vogels / Warren Buffett</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Cost &amp; tail-latency are core
+            non-functional requirements</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Every architectural decision carries a financial invoice and a tail-latency footprint. Optimize in-process memory sharing, columnar Parquet layouts, and embedded storage engines before paying the multi-thousand-dollar cloud tax for managed distributed analytics. A frugal architecture protects gross margins and survives economic shifts; an undisciplined one drowns in infrastructure rent.
+            Every architectural decision carries a financial invoice and a tail-latency footprint. Optimize in-process
+            memory sharing, columnar Parquet layouts, and embedded storage engines before paying the
+            multi-thousand-dollar cloud tax for managed distributed analytics. A frugal architecture protects gross
+            margins and survives economic shifts; an undisciplined one drowns in infrastructure rent.
           </p>
         </div>
 
         <!-- Principle IV: Inversion & Mental Models (Charlie Munger) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">IV · Inversion &amp; mental models — Charlie Munger</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Invert, always invert: design against ruin first</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">IV · Inversion &amp; mental models — Charlie
+            Munger</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Invert, always invert: design against ruin
+            first</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            As Charlie Munger observed, many complex problems are solved only when addressed backwards. Instead of asking how to make a distributed system succeed, first ask what will inevitably destroy it: split-brain states, unbound memory spikes, data corruption, and operational burnout. Design invariants that structurally preclude catastrophic outcomes before optimizing the happy path.
+            As Charlie Munger observed, many complex problems are solved only when addressed backwards. Instead of
+            asking how to make a distributed system succeed, first ask what will inevitably destroy it: split-brain
+            states, unbound memory spikes, data corruption, and operational burnout. Design invariants that structurally
+            preclude catastrophic outcomes before optimizing the happy path.
           </p>
         </div>
 
         <!-- Principle V: Deliberate Velocity & Slow Productivity (Newport / Craft) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">V · Deliberate velocity ("slow is smooth, smooth is fast") — Cal Newport</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Haste is the enemy of real engineering velocity</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">V · Deliberate velocity ("slow is smooth,
+            smooth is fast") — Cal Newport</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Haste is the enemy of real engineering
+            velocity</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Frantic, hype-driven development produces fragile, debt-ridden software that grinds progress to a halt within months. We subscribe to Cal Newport's ethos of slow productivity: do fewer things, focus deeply on domain invariants, and prioritize structural soundness. When you move deliberately through strict type boundaries, you do not spend half your week troubleshooting production emergencies.
+            Frantic, hype-driven development produces fragile, debt-ridden software that grinds progress to a halt
+            within months. We subscribe to Cal Newport's ethos of slow productivity: do fewer things, focus deeply on
+            domain invariants, and prioritize structural soundness. When you move deliberately through strict type
+            boundaries, you do not spend half your week troubleshooting production emergencies.
           </p>
         </div>
 
         <!-- Principle VI: Decentralized Simplicity (Hintjens) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VI · Decentralized simplicity — Pieter Hintjens (ZeroMQ)</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Prefer dumb pipes and smart endpoints over centralized daemons</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VI · Decentralized simplicity — Pieter Hintjens
+            (ZeroMQ)</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Prefer dumb pipes and smart endpoints over
+            centralized daemons</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Centralized brokers and global coordinators create brittle operational coupling. As Pieter Hintjens proved, systems scale cleanly when messaging protocols are localized, asynchronous, and point-to-point. Compensations, retries, and idempotency belong within the domain actors themselves—never delegated to an invisible third-party workflow daemon.
+            Centralized brokers and global coordinators create brittle operational coupling. As Pieter Hintjens proved,
+            systems scale cleanly when messaging protocols are localized, asynchronous, and point-to-point.
+            Compensations, retries, and idempotency belong within the domain actors themselves—never delegated to an
+            invisible third-party workflow daemon.
           </p>
         </div>
 
         <!-- Principle VII: Functional Domain-Driven Design (Wlaschin) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VII · Functional domain-driven design — Scott Wlaschin</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Types as executable ubiquitous language</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VII · Functional domain-driven design — Scott
+            Wlaschin</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Types as executable ubiquitous language
+          </h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Domain models should not be buried under heavyweight object hierarchies or ORM abstractions. As Scott Wlaschin demonstrated, the domain model is an executable ubiquitous language composed of pure types: records for logical compositions, variants for distinct business choices, and total functions for workflows. Code documents business reality faithfully because the type system leaves no room for ambiguity.
+            Domain models should not be buried under heavyweight object hierarchies or ORM abstractions. As Scott
+            Wlaschin demonstrated, the domain model is an executable ubiquitous language composed of pure types: records
+            for logical compositions, variants for distinct business choices, and total functions for workflows. Code
+            documents business reality faithfully because the type system leaves no room for ambiguity.
           </p>
         </div>
 
         <!-- Principle VIII: Clean Layering & Fault Containment (Tanenbaum) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VIII · Clean layering &amp; fault containment — Andrew S. Tanenbaum</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Isolate volatile adapters from the core domain kernel</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VIII · Clean layering &amp; fault containment —
+            Andrew S. Tanenbaum</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Isolate volatile adapters from the core
+            domain kernel</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Operating system stability relies on strict boundary layering: untrusted, flaky device drivers must not run where critical kernel abstractions live. In software systems, we apply the exact same discipline. Network protocols, database drivers, and third-party vendor APIs must remain isolated at the application rim. A panic in an external adapter should never poison or crash the core domain engine.
+            Operating system stability relies on strict boundary layering: untrusted, flaky device drivers must not run
+            where critical kernel abstractions live. In software systems, we apply the exact same discipline. Network
+            protocols, database drivers, and third-party vendor APIs must remain isolated at the application rim. A
+            panic in an external adapter should never poison or crash the core domain engine.
           </p>
         </div>
 
         <!-- Principle IX: Collaborative Apprenticeship & Mentorship -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">IX · Collaborative apprenticeship — Leadership &amp; mentorship</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Demystify abstractions through hands-on craft</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">IX · Collaborative apprenticeship — Leadership
+            &amp; mentorship</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Demystify abstractions through hands-on
+            craft</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Great software systems are not preserved by isolated "rockstars"; they thrive when engineering is practiced as an open apprenticeship. Senior architects must pair collaboratively, demystify compiler errors, explain the commercial reasons behind trade-offs, and give emerging engineers hands-on ownership of complex subsystems. High agency grows through shared technical mastery.
+            Great software systems are not preserved by isolated "rockstars"; they thrive when engineering is practiced
+            as an open apprenticeship. Senior architects must pair collaboratively, demystify compiler errors, explain
+            the commercial reasons behind trade-offs, and give emerging engineers hands-on ownership of complex
+            subsystems. High agency grows through shared technical mastery.
           </p>
         </div>
 
         <!-- Principle X: Evolutionary Discipline (Fowler) -->
         <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">X · Evolutionary discipline — Martin Fowler (Refactoring)</p>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Continuous restructuring trumps big-bang architectural rewrites</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">X · Evolutionary discipline — Martin Fowler
+            (Refactoring)</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Continuous restructuring trumps big-bang
+            architectural rewrites</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            The best architectures are not carved into stone tablets; they evolve through disciplined, test-backed transformations. Clean code smells early, modularize within a monolith before carving physical network boundaries, and refactor relentlessly to keep cognitive drag near zero.
+            The best architectures are not carved into stone tablets; they evolve through disciplined, test-backed
+            transformations. Clean code smells early, modularize within a monolith before carving physical network
+            boundaries, and refactor relentlessly to keep cognitive drag near zero.
           </p>
         </div>
       </div>
@@ -577,7 +662,8 @@
             </li>
             <li>
               <p class="font-serif text-base leading-snug text-ink dark:text-bone">The Essays of Warren Buffett</p>
-              <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Warren Buffett &amp; Lawrence Cunningham</p>
+              <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Warren Buffett &amp; Lawrence
+                Cunningham</p>
             </li>
             <li>
               <p class="font-serif text-base leading-snug text-ink dark:text-bone">The Frugal Architect</p>
@@ -603,12 +689,15 @@
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Andrew S. Tanenbaum</p>
             </li>
             <li>
-              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Refactoring: Improving Existing Code</p>
+              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Refactoring: Improving Existing Code
+              </p>
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Martin Fowler</p>
             </li>
             <li>
-              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Fundamentals of Software Architecture</p>
-              <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Ford, Richards, Sadalage &amp; Dehghani</p>
+              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Fundamentals of Software Architecture
+              </p>
+              <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Ford, Richards, Sadalage &amp;
+                Dehghani</p>
             </li>
           </ul>
         </div>
@@ -630,11 +719,13 @@
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">René Descartes</p>
             </li>
             <li>
-              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Computing Machinery and Intelligence</p>
+              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Computing Machinery and Intelligence
+              </p>
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Alan Turing</p>
             </li>
             <li>
-              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Compilers: Principles, Techniques &amp; Tools</p>
+              <p class="font-serif text-base leading-snug text-ink dark:text-bone">Compilers: Principles, Techniques
+                &amp; Tools</p>
               <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-0.5">Aho, Lam, Sethi &amp; Ullman</p>
             </li>
           </ul>
@@ -646,7 +737,8 @@
       <div class="space-y-8 pt-2">
         <div class="space-y-1">
           <h3 class="font-serif text-2xl font-normal text-ink dark:text-bone">Extended essays</h3>
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">Five-point treatments bridging business economics, team leadership, and production architecture</p>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">Five-point treatments bridging business
+            economics, team leadership, and production architecture</p>
         </div>
 
         <!-- Essay 1: The Frugal Architect's Ledger -->
@@ -658,19 +750,38 @@
           <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The frugal architect's ledger</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
-              <strong>I. The Context:</strong> Modern cloud software often defaults to unchecked distributed decomposition. Engineers instantiate managed data warehouses, partitioned message queues, and Kubernetes control planes before their product has served its first hundred concurrent requests. What begins as an ambition for infinite elasticity inevitably transforms into an unsustainable cloud invoice that impairs startup gross margins.
+              <strong>I. The Context:</strong> Modern cloud software often defaults to unchecked distributed
+              decomposition. Engineers instantiate managed data warehouses, partitioned message queues, and Kubernetes
+              control planes before their product has served its first hundred concurrent requests. What begins as an
+              ambition for infinite elasticity inevitably transforms into an unsustainable cloud invoice that impairs
+              startup gross margins.
             </p>
             <p>
-              <strong>II. The Core Thesis:</strong> As articulated in Werner Vogels' <em>The Frugal Architect</em> and Warren Buffett's capital allocation principles, cost is not an accounting metric reviewed at the end of the fiscal quarter; it is a fundamental non-functional requirement. An architect who cannot predict the dollar cost of a single API request does not understand their own system's mechanics or its commercial impact.
+              <strong>II. The Core Thesis:</strong> As articulated in Werner Vogels' <em>The Frugal Architect</em> and
+              Warren Buffett's capital allocation principles, cost is not an accounting metric reviewed at the end of
+              the fiscal quarter; it is a fundamental non-functional requirement. An architect who cannot predict the
+              dollar cost of a single API request does not understand their own system's mechanics or its commercial
+              impact.
             </p>
             <p>
-              <strong>III. Production Realities (pahukama.com):</strong> Rather than maintaining idle Snowflake or Redshift clusters, we pipe structured analytical telemetry directly to compressed Parquet files stored on S3. When CRM analytics are requested, an embedded DuckDB worker queries the columnar partitions in-process. Tail-latency drops from several seconds over remote wire connections to sub-second localized execution, while idle infrastructure costs collapse to zero.
+              <strong>III. Production Realities (pahukama.com):</strong> Rather than maintaining idle Snowflake or
+              Redshift clusters, we pipe structured analytical telemetry directly to compressed Parquet files stored on
+              S3. When CRM analytics are requested, an embedded DuckDB worker queries the columnar partitions
+              in-process. Tail-latency drops from several seconds over remote wire connections to sub-second localized
+              execution, while idle infrastructure costs collapse to zero.
             </p>
             <p>
-              <strong>IV. The Trade-Off &amp; Friction:</strong> Nothing comes without sacrifice. In-process DuckDB instances share the memory footprint of the host instance. A poorly structured analytical aggregation can induce memory pressure on adjacent transaction handlers if concurrency limits are omitted. We accept the friction of manual memory bounding and S3 cold-fetch latency in exchange for deleting entire multi-thousand-dollar managed clusters.
+              <strong>IV. The Trade-Off &amp; Friction:</strong> Nothing comes without sacrifice. In-process DuckDB
+              instances share the memory footprint of the host instance. A poorly structured analytical aggregation can
+              induce memory pressure on adjacent transaction handlers if concurrency limits are omitted. We accept the
+              friction of manual memory bounding and S3 cold-fetch latency in exchange for deleting entire
+              multi-thousand-dollar managed clusters.
             </p>
             <p>
-              <strong>V. Falsification &amp; Future Bounds:</strong> This ledger holds true until analytical query volume approaches continuous saturation across gigabyte-scale datasets. When concurrent query load threatens transactional latency envelopes, the analytical workload will be extracted to an isolated worker pool—not before.
+              <strong>V. Falsification &amp; Future Bounds:</strong> This ledger holds true until analytical query
+              volume approaches continuous saturation across gigabyte-scale datasets. When concurrent query load
+              threatens transactional latency envelopes, the analytical workload will be extracted to an isolated worker
+              pool—not before.
             </p>
           </div>
           <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
@@ -684,22 +795,40 @@
             <span>II · Functional domain design</span>
             <span>2025-09</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Functional domain modeling &amp; type-safe workflows</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Functional domain modeling &amp; type-safe
+            workflows</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
-              <strong>I. The Context:</strong> Enterprise backends are frequently riddled with invisible execution paths: unhandled exceptions, null pointer surprises, and nested `try/catch` wrappers that mask logic errors under the guise of resilience. When an exception is thrown five call frames deep, tracing the causal flow is an exercise in archaeological excavation.
+              <strong>I. The Context:</strong> Enterprise backends are frequently riddled with invisible execution
+              paths: unhandled exceptions, null pointer surprises, and nested `try/catch` wrappers that mask logic
+              errors under the guise of resilience. When an exception is thrown five call frames deep, tracing the
+              causal flow is an exercise in archaeological excavation.
             </p>
             <p>
-              <strong>II. The Core Thesis:</strong> Scott Wlaschin's <em>Domain Modeling Made Functional</em> provides the antidote: functional domain-driven design. A business use case is nothing more than a series of pure transformations connected along two tracks—Success and Failure. Functions take an input and return `Result('data, 'domain_error)`. Any failure diverts execution cleanly onto the error track without crashing the thread or skipping domain compensation hooks.
+              <strong>II. The Core Thesis:</strong> Scott Wlaschin's <em>Domain Modeling Made Functional</em> provides
+              the antidote: functional domain-driven design. A business use case is nothing more than a series of pure
+              transformations connected along two tracks—Success and Failure. Functions take an input and return
+              `Result('data, 'domain_error)`. Any failure diverts execution cleanly onto the error track without
+              crashing the thread or skipping domain compensation hooks.
             </p>
             <p>
-              <strong>III. Production Realities (pahukama.com):</strong> In our OCaml checkout engine, the entire order intake is expressed as a monadic composition: <code>validate_cart &gt;=&gt; reserve_inventory &gt;=&gt; authorize_payment &gt;=&gt; persist_order</code>. If <code>authorize_payment</code> yields <code>CardDeclined</code>, the execution never touches <code>persist_order</code>; it passes directly to the error branch handler, triggering an immediate inventory release. The compiler refuses to compile the pipeline if any potential domain error is omitted.
+              <strong>III. Production Realities (pahukama.com):</strong> In our OCaml checkout engine, the entire order
+              intake is expressed as a monadic composition: <code>validate_cart &gt;=&gt; reserve_inventory &gt;=&gt;
+                authorize_payment &gt;=&gt; persist_order</code>. If <code>authorize_payment</code> yields
+              <code>CardDeclined</code>, the execution never touches <code>persist_order</code>; it passes directly to
+              the error branch handler, triggering an immediate inventory release. The compiler refuses to compile the
+              pipeline if any potential domain error is omitted.
             </p>
             <p>
-              <strong>IV. The Trade-Off &amp; Friction:</strong> Writing idiomatic functional pipelines requires an upfront cognitive reorientation for engineers accustomed to procedural exceptions. Composing asynchronous I/O with monadic result types (`Result.t Lwt.t`) requires strict combinator discipline. You exchange runtime chaos for compiler-time ceremony.
+              <strong>IV. The Trade-Off &amp; Friction:</strong> Writing idiomatic functional pipelines requires an
+              upfront cognitive reorientation for engineers accustomed to procedural exceptions. Composing asynchronous
+              I/O with monadic result types (`Result.t Lwt.t`) requires strict combinator discipline. You exchange
+              runtime chaos for compiler-time ceremony.
             </p>
             <p>
-              <strong>V. Falsification &amp; Future Bounds:</strong> For trivial utility scripts or throwaway scrapers, establishing formal ADTs and railway tracks represents needless overhead. However, wherever financial transactions, inventory reserves, or legal compliance are at stake, functional DDD is non-negotiable.
+              <strong>V. Falsification &amp; Future Bounds:</strong> For trivial utility scripts or throwaway scrapers,
+              establishing formal ADTs and railway tracks represents needless overhead. However, wherever financial
+              transactions, inventory reserves, or legal compliance are at stake, functional DDD is non-negotiable.
             </p>
           </div>
           <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
@@ -716,19 +845,35 @@
           <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Sagas over two-phase commit</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
-              <strong>I. The Context:</strong> Multi-step transaction processing across decoupled services frequently tempts engineers into reaching for distributed Two-Phase Commit (2PC) or centralized coordination orchestrators like Temporal or AWS Step Functions. However, distributed transactions across networks with intermittent latency violate the CAP theorem's availability guarantees.
+              <strong>I. The Context:</strong> Multi-step transaction processing across decoupled services frequently
+              tempts engineers into reaching for distributed Two-Phase Commit (2PC) or centralized coordination
+              orchestrators like Temporal or AWS Step Functions. However, distributed transactions across networks with
+              intermittent latency violate the CAP theorem's availability guarantees.
             </p>
             <p>
-              <strong>II. The Core Thesis:</strong> Applying Pieter Hintjens' lessons from <em>The ZeroMQ Guide</em> and DeCandia's <em>Dynamo</em> paper, we recognize that network boundaries are inherently hostile and asynchronous. Consistency cannot be forced through global locks; it must be achieved through explicit, backward-compensating actions and localized state transitions.
+              <strong>II. The Core Thesis:</strong> Applying Pieter Hintjens' lessons from <em>The ZeroMQ Guide</em> and
+              DeCandia's <em>Dynamo</em> paper, we recognize that network boundaries are inherently hostile and
+              asynchronous. Consistency cannot be forced through global locks; it must be achieved through explicit,
+              backward-compensating actions and localized state transitions.
             </p>
             <p>
-              <strong>III. Production Realities (pahukama.com):</strong> We implemented a native Saga orchestration engine in OCaml. Instead of deploying an external workflow daemon, each transaction stage is encoded as a discrete event on an in-memory queue backed by PostgreSQL transactional outboxes. If payment processing succeeds but inventory allocation subsequently fails, the system executes explicit domain compensations (reversing charges, releasing holds) without global locking.
+              <strong>III. Production Realities (pahukama.com):</strong> We implemented a native Saga orchestration
+              engine in OCaml. Instead of deploying an external workflow daemon, each transaction stage is encoded as a
+              discrete event on an in-memory queue backed by PostgreSQL transactional outboxes. If payment processing
+              succeeds but inventory allocation subsequently fails, the system executes explicit domain compensations
+              (reversing charges, releasing holds) without global locking.
             </p>
             <p>
-              <strong>IV. The Trade-Off &amp; Friction:</strong> The operational cost is shifted squarely into engineering diligence. A developer cannot rely on database-level `ROLLBACK`. Every domain action requires writing, testing, and verifying an idempotent compensating counterpart. If an unhandled network partition stalls an edge compensation, manual reconciliation routines must be available.
+              <strong>IV. The Trade-Off &amp; Friction:</strong> The operational cost is shifted squarely into
+              engineering diligence. A developer cannot rely on database-level `ROLLBACK`. Every domain action requires
+              writing, testing, and verifying an idempotent compensating counterpart. If an unhandled network partition
+              stalls an edge compensation, manual reconciliation routines must be available.
             </p>
             <p>
-              <strong>V. Falsification &amp; Future Bounds:</strong> The native in-memory saga pattern functions flawlessly within a modular monolith handling hundreds of concurrent multi-step orders. Should asynchronous transactions swell into thousands of heterogeneous micro-services across separate corporate boundaries, dedicated orchestration machinery will be reconsidered.
+              <strong>V. Falsification &amp; Future Bounds:</strong> The native in-memory saga pattern functions
+              flawlessly within a modular monolith handling hundreds of concurrent multi-step orders. Should
+              asynchronous transactions swell into thousands of heterogeneous micro-services across separate corporate
+              boundaries, dedicated orchestration machinery will be reconsidered.
             </p>
           </div>
           <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
@@ -742,22 +887,40 @@
             <span>IV · Layered modularity &amp; fault isolation</span>
             <span>2025-04</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Clean layering &amp; fault isolation in backend systems</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Clean layering &amp; fault isolation in
+            backend systems</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
-              <strong>I. The Context:</strong> Web applications routinely succumb to the "big ball of mud" syndrome. Database drivers, third-party payment SDKs, and transport protocols become tightly entwined with core business rules. When a vendor API alters its payload schema or throws an undocumented timeout, entire backend workers crash.
+              <strong>I. The Context:</strong> Web applications routinely succumb to the "big ball of mud" syndrome.
+              Database drivers, third-party payment SDKs, and transport protocols become tightly entwined with core
+              business rules. When a vendor API alters its payload schema or throws an undocumented timeout, entire
+              backend workers crash.
             </p>
             <p>
-              <strong>II. The Core Thesis:</strong> In <em>Modern Operating Systems</em>, Andrew S. Tanenbaum demonstrated that system resilience depends upon strict, clean abstraction layering and modular fault isolation. Systems break when volatile peripheral dependencies run inside the same blast radius as foundational domain operations. Reliability demands keeping the core kernel pure, with peripheral I/O isolated behind rigid adapter boundaries.
+              <strong>II. The Core Thesis:</strong> In <em>Modern Operating Systems</em>, Andrew S. Tanenbaum
+              demonstrated that system resilience depends upon strict, clean abstraction layering and modular fault
+              isolation. Systems break when volatile peripheral dependencies run inside the same blast radius as
+              foundational domain operations. Reliability demands keeping the core kernel pure, with peripheral I/O
+              isolated behind rigid adapter boundaries.
             </p>
             <p>
-              <strong>III. Production Realities (pahukama.com):</strong> We structure our backend modular monolith following the Ports &amp; Adapters principle. The core is our pure functional domain engine. Third-party integrations (Stripe, Shippo, SMTP mailers) run as isolated outer adapters behind strict interfaces. If an external driver encounters an unhandled payload exception, the blast radius is contained strictly at the adapter boundary without poisoning domain state.
+              <strong>III. Production Realities (pahukama.com):</strong> We structure our backend modular monolith
+              following the Ports &amp; Adapters principle. The core is our pure functional domain engine. Third-party
+              integrations (Stripe, Shippo, SMTP mailers) run as isolated outer adapters behind strict interfaces. If an
+              external driver encounters an unhandled payload exception, the blast radius is contained strictly at the
+              adapter boundary without poisoning domain state.
             </p>
             <p>
-              <strong>IV. The Trade-Off &amp; Friction:</strong> Maintaining pure abstraction barriers requires mapping domain entities to adapter DTOs back and forth. You write additional translation boilerplate rather than passing database records directly to the HTTP serializer. We gladly pay this structural translation cost to guarantee total fault isolation.
+              <strong>IV. The Trade-Off &amp; Friction:</strong> Maintaining pure abstraction barriers requires mapping
+              domain entities to adapter DTOs back and forth. You write additional translation boilerplate rather than
+              passing database records directly to the HTTP serializer. We gladly pay this structural translation cost
+              to guarantee total fault isolation.
             </p>
             <p>
-              <strong>V. Falsification &amp; Future Bounds:</strong> For simple CRUD applications with minimal lifespan, maintaining strict port/adapter isolation may introduce premature abstraction drag. But for core domain systems expected to survive years of third-party vendor churn, Tanenbaum's layered isolation philosophy is essential.
+              <strong>V. Falsification &amp; Future Bounds:</strong> For simple CRUD applications with minimal lifespan,
+              maintaining strict port/adapter isolation may introduce premature abstraction drag. But for core domain
+              systems expected to survive years of third-party vendor churn, Tanenbaum's layered isolation philosophy is
+              essential.
             </p>
           </div>
           <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
@@ -771,22 +934,40 @@
             <span>V · Management &amp; apprenticeship</span>
             <span>2025-01</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The economics of simplicity &amp; engineering apprenticeship</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The economics of simplicity &amp;
+            engineering apprenticeship</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
-              <strong>I. The Context:</strong> Engineering organizations often believe that hiring more developers directly accelerates velocity. In practice, Brooks' Law reliably takes hold: adding personnel to a complex, undisciplined architecture creates quadratic communication drag and exponentially higher defect injection rates.
+              <strong>I. The Context:</strong> Engineering organizations often believe that hiring more developers
+              directly accelerates velocity. In practice, Brooks' Law reliably takes hold: adding personnel to a
+              complex, undisciplined architecture creates quadratic communication drag and exponentially higher defect
+              injection rates.
             </p>
             <p>
-              <strong>II. The Core Thesis:</strong> Drawing from Charlie Munger's multidisciplinary mental models and Cal Newport's philosophy of deep craft, high-performing teams do not scale through head-count sprawl; they scale through <em>radical simplicity and hands-on apprenticeship</em>. When the system's architecture is simple and bounded by strict types, a small, tightly aligned team can easily outbuild a sprawling enterprise department.
+              <strong>II. The Core Thesis:</strong> Drawing from Charlie Munger's multidisciplinary mental models and
+              Cal Newport's philosophy of deep craft, high-performing teams do not scale through head-count sprawl; they
+              scale through <em>radical simplicity and hands-on apprenticeship</em>. When the system's architecture is
+              simple and bounded by strict types, a small, tightly aligned team can easily outbuild a sprawling
+              enterprise department.
             </p>
             <p>
-              <strong>III. Production Realities (pahukama.com):</strong> Rather than treating architecture as ivory-tower dogma, we run an apprenticeship model. Senior engineers pair directly with teammates across production RFCs, domain refactors, and compiler errors. Because the modular monolith has zero distributed daemon sprawl, a new engineer can run the entire business suite locally on their laptop in under two minutes and push verified code on week one.
+              <strong>III. Production Realities (pahukama.com):</strong> Rather than treating architecture as
+              ivory-tower dogma, we run an apprenticeship model. Senior engineers pair directly with teammates across
+              production RFCs, domain refactors, and compiler errors. Because the modular monolith has zero distributed
+              daemon sprawl, a new engineer can run the entire business suite locally on their laptop in under two
+              minutes and push verified code on week one.
             </p>
             <p>
-              <strong>IV. The Trade-Off &amp; Friction:</strong> Apprenticeship requires active senior time. It means choosing live pairing over passive pull-request comments and taking time to teach the commercial rationale behind architectural boundaries. The trade-off is an upfront leadership time investment in exchange for compounding team autonomy and near-zero turnover.
+              <strong>IV. The Trade-Off &amp; Friction:</strong> Apprenticeship requires active senior time. It means
+              choosing live pairing over passive pull-request comments and taking time to teach the commercial rationale
+              behind architectural boundaries. The trade-off is an upfront leadership time investment in exchange for
+              compounding team autonomy and near-zero turnover.
             </p>
             <p>
-              <strong>V. Falsification &amp; Future Bounds:</strong> In massive organizations with thousands of loosely coordinated contractors, standardized bureaucratic processes and rigid microservice silos may be forced upon teams to contain organizational boundaries. For high-leverage product teams, deliberate simplicity and close apprenticeship remain unbeatable.
+              <strong>V. Falsification &amp; Future Bounds:</strong> In massive organizations with thousands of loosely
+              coordinated contractors, standardized bureaucratic processes and rigid microservice silos may be forced
+              upon teams to contain organizational boundaries. For high-leverage product teams, deliberate simplicity
+              and close apprenticeship remain unbeatable.
             </p>
           </div>
           <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
@@ -802,7 +983,8 @@
         <p class="font-serif italic text-xl sm:text-2xl text-ink dark:text-bone leading-relaxed max-w-xl mx-auto">
           "We can only see a short distance ahead, but we can see plenty there that needs to be done."
         </p>
-        <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— Alan Turing, Computing Machinery and Intelligence</p>
+        <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— Alan Turing, Computing Machinery and
+          Intelligence</p>
       </section>
 
     </div>
@@ -832,7 +1014,7 @@
       const dark = html.classList.contains('dark');
       html.classList.toggle('dark', !dark);
       html.classList.toggle('light', dark);
-      try { localStorage.setItem('theme', dark ? 'light' : 'dark'); } catch (e) {}
+      try {localStorage.setItem('theme', dark ? 'light' : 'dark');} catch (e) { }
       updateThemeLabel();
     }
 
@@ -840,7 +1022,7 @@
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       let stored = null;
-      try { stored = localStorage.getItem('theme'); } catch (err) {}
+      try {stored = localStorage.getItem('theme');} catch (err) { }
       if (stored) return;
       document.documentElement.classList.toggle('dark', e.matches);
       document.documentElement.classList.toggle('light', !e.matches);
@@ -869,7 +1051,7 @@
       }
 
       // Scroll to top of main on tab switch
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({top: 0, behavior: 'smooth'});
     }
 
     // Initialize view from URL hash if provided
@@ -904,7 +1086,7 @@
       }
       const btnText = document.getElementById('emailText');
       btnText.innerText = 'Copied to clipboard';
-      setTimeout(() => { btnText.innerText = email; }, 2000);
+      setTimeout(() => {btnText.innerText = email;}, 2000);
     }
 
     function downloadResume() {
