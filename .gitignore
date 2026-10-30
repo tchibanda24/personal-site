@@ -1,0 +1,9 @@
+# bisect test coverage directory & deps
+node_modules
+
+# Top level AWS pem files ignored
+*.pem
+
+*.log.*
+.aider*
+.env
