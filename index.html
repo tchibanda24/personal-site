@@ -172,8 +172,9 @@
 
       <nav class="flex items-center space-x-5 sm:space-x-6 text-sm font-sans text-inkMuted dark:text-boneMuted">
         <a href="#notes" class="nav-link hover:text-ink dark:hover:text-bone transition-colors">Notes</a>
+        <a href="#manifesto" class="nav-link hover:text-ink dark:hover:text-bone transition-colors">Principles</a>
+        <a href="#canon" class="nav-link hover:text-ink dark:hover:text-bone transition-colors">Canon &amp; Essays</a>
         <a href="#architecture" class="nav-link hover:text-ink dark:hover:text-bone transition-colors">Systems</a>
-        <a href="#canon" class="nav-link hover:text-ink dark:hover:text-bone transition-colors">Canon</a>
         <a href="#experience" class="nav-link hover:text-ink dark:hover:text-bone transition-colors">Track</a>
         <!-- Dark Mode Toggle Button -->
         <button onclick="toggleTheme()" type="button" aria-label="Toggle color theme"
@@ -288,159 +289,96 @@
           Filed under: OCaml · minimalism · operational load
         </p>
       </article>
-
-      <!-- Notebook Index -->
-      <div
-        class="border-t border-b border-paperBorder dark:border-charcoalBorder divide-y divide-paperBorder dark:divide-charcoalBorder">
-
-        <div class="flex items-baseline gap-5 py-4">
-          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted w-14 shrink-0">2025-11</span>
-          <div class="space-y-1">
-            <h4 class="font-serif text-lg font-normal text-ink dark:text-bone">The Frugal Architect's Ledger</h4>
-            <p class="text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
-              Treating cloud spend and tail latency as first-class design constraints—cost is a non-functional
-              requirement, not an invoice you read later.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-baseline gap-5 py-4">
-          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted w-14 shrink-0">2025-08</span>
-          <div class="space-y-1">
-            <h4 class="font-serif text-lg font-normal text-ink dark:text-bone">Sagas over Two-Phase Commit</h4>
-            <p class="text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
-              Compensating actions as explicit, testable domain code in the OCaml event bus—and what we gave up by
-              leaving the orchestrator daemon unborn.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-baseline gap-5 py-4">
-          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted w-14 shrink-0">2025-05</span>
-          <div class="space-y-1">
-            <h4 class="font-serif text-lg font-normal text-ink dark:text-bone">ADTs Are Cheap; Incidental Complexity Is
-              Not</h4>
-            <p class="text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
-              Making illegal states unrepresentable at the type level, and the honest price of custom infrastructure
-              bindings when you leave the mainstream.
-            </p>
-          </div>
-        </div>
-
-      </div>
     </section>
 
-    <!-- Section: Architectural Case Studies -->
-    <section id="architecture" class="space-y-6 reveal">
+    <!-- Section: Architect's Manifesto & Operating Principles -->
+    <section id="manifesto" class="space-y-6 reveal">
       <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3">
         <div class="flex items-baseline justify-between">
           <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
-            Systems in Production
+            Architectural Principles
           </h2>
           <span class="font-mono text-xs text-sage dark:text-sageLight">02</span>
         </div>
-        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Design records from pahukama.com</span>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">A practitioner's creed derived from first principles and foundational literature</span>
       </div>
 
       <div class="space-y-4">
-
-        <!-- Case Study 1 -->
-        <div
-          class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
-          <button onclick="toggleTab('cs1', this)" type="button" aria-expanded="false" aria-controls="cs1"
-            class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
-            <div>
-              <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">OCaml / Domain-Driven
-                Design</span>
-              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Modular Monolith &amp; Distributed
-                Saga Engine</h3>
-            </div>
-            <i id="cs1-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
-          </button>
-          <div id="cs1" role="region"
-            class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
-            <p><strong class="text-ink dark:text-bone">Context:</strong> Built for pahukama.com to handle distributed
-              e-commerce transactions without relying on heavy third-party workflow orchestrators.</p>
-            <p><strong class="text-ink dark:text-bone">Design:</strong> Asynchronous messaging bus with explicit
-              compensation logic, short-lived JWT tokens, and database TTL bounds to enforce idempotency across
-              intermittent networks.</p>
-            <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> Zero orchestrator daemon overhead;
-              processed 500+ transactions with fault tolerance built directly into OCaml's static type system.</p>
-            <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Every compensation is a
-              code path we must design and test ourselves; the framework gives nothing for free. In exchange, there is
-              no extra infrastructure to operate at 3 a.m.</p>
+        <!-- Principle I -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-terracotta dark:text-terracottaLight uppercase">Principle I · Methodological Reduction</span>
+            <span class="text-inkMuted dark:text-boneMuted">Descartes (1637)</span>
           </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Strip Inherited Dogma to Undeniable First Principles</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            Never adopt an architectural pattern because an industry consensus decreed it. Reject the default sprawl of microservices, distributed coordinators, and managed clusters until your domain proves vertical exhaustion. Divide each problem into as many parts as necessary to resolve it cleanly, and verify every interface boundary with unyielding skepticism.
+          </p>
         </div>
 
-        <!-- Case Study 2 -->
-        <div
-          class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
-          <button onclick="toggleTab('cs2', this)" type="button" aria-expanded="false" aria-controls="cs2"
-            class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
-            <div>
-              <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">DuckDB / AWS S3</span>
-              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Embedded Analytics &amp; Zero-Copy
-                Lakehouse</h3>
-            </div>
-            <i id="cs2-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
-          </button>
-          <div id="cs2" role="region"
-            class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
-            <p><strong class="text-ink dark:text-bone">Context:</strong> E-commerce analytics often suffer from
-              expensive warehouse costs (Snowflake/Redshift) during idle periods.</p>
-            <p><strong class="text-ink dark:text-bone">Design:</strong> Streamed event logs directly as Parquet files to
-              AWS S3, executing zero-copy in-memory SQL queries via embedded DuckDB instance within the backend runtime.
-            </p>
-            <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> Sub-second CRM analytical queries at
-              near-zero recurring infrastructure cost.</p>
-            <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Analytical queries share
-              the backend's memory envelope. We bound concurrency and accept S3 cold-start latency in exchange for zero
-              idle warehouse spend.</p>
+        <!-- Principle II -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-sage dark:text-sageLight uppercase">Principle II · Mathematical Boundary Defense</span>
+            <span class="text-inkMuted dark:text-boneMuted">Sipser / Turing</span>
           </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Make Illegal States Unrepresentable at Compile Time</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            State transitions must mirror formal state machines. Algebraic Data Types (ADTs) and expressive type systems should police domain invariants so that invalid business states fail at compilation rather than generating cryptic 3 a.m. runtime panics. Formal correctness is not academic pedantry; it is the ultimate lever of engineering velocity.
+          </p>
         </div>
 
-        <!-- Case Study 3 -->
-        <div
-          class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
-          <button onclick="toggleTab('cs3', this)" type="button" aria-expanded="false" aria-controls="cs3"
-            class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
-            <div>
-              <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">HTMX / Server-Side
-                Rendering</span>
-              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Resilient Projections &amp; State
-                Idempotency</h3>
-            </div>
-            <i id="cs3-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
-          </button>
-          <div id="cs3" role="region"
-            class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
-            <p><strong class="text-ink dark:text-bone">Context:</strong> Eliminating client-side SPA state divergence
-              and heavy JavaScript bundles.</p>
-            <p><strong class="text-ink dark:text-bone">Design:</strong> Server-side rendered HTML fragments coupled with
-              HTMX for declarative DOM updates, protected by token-backed request deduplication.</p>
-            <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> One language on the server, no hydration
-              bugs, mutations rendered idempotent at the edge.</p>
-            <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Interactions pay a server
-              round-trip; we accept ~80 ms p50 latency in exchange for deleting an entire client-side state layer.</p>
+        <!-- Principle III -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-terracotta dark:text-terracottaLight uppercase">Principle III · Frugal Engineering</span>
+            <span class="text-inkMuted dark:text-boneMuted">Vogels / The Frugal Architect</span>
           </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Cost &amp; Tail-Latency Are Core Non-Functional Requirements</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            Every architectural decision carries a financial invoice and a tail-latency footprint. Optimize in-process memory sharing, columnar Parquet layouts, and embedded storage engines before paying the multi-thousand-dollar cloud tax for managed distributed analytics. A frugal architecture survives economic shifts; an undisciplined one drowns in infrastructure rent.
+          </p>
         </div>
 
+        <!-- Principle IV -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-sage dark:text-sageLight uppercase">Principle IV · Decentralized Simplicity</span>
+            <span class="text-inkMuted dark:text-boneMuted">Hintjens / ZeroMQ</span>
+          </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Prefer Dumb Pipes and Smart Endpoints over Centralized Daemons</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            Centralized brokers and global coordinators create brittle operational coupling. As Pieter Hintjens proved, systems scale cleanly when messaging protocols are localized, asynchronous, and point-to-point. Compensations, retries, and idempotency belong within the domain actors themselves—never delegated to an invisible third-party workflow daemon.
+          </p>
+        </div>
+
+        <!-- Principle V -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-terracotta dark:text-terracottaLight uppercase">Principle V · Evolutionary Discipline</span>
+            <span class="text-inkMuted dark:text-boneMuted">Fowler (Refactoring)</span>
+          </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Continuous Restructuring Trumps Big-Bang Architectural Rewrites</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            The best architectures are not carved into stone tablets; they evolve through disciplined, test-backed transformations. Clean code smells early, modularize within a monolith before carving physical network boundaries, and refactor relentlessly to keep cognitive drag near zero.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- Section: The Canon -->
-    <section id="canon" class="space-y-6 reveal">
+    <!-- Section: The Canon & Extended Essays -->
+    <section id="canon" class="space-y-8 reveal">
       <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3">
         <div class="flex items-baseline justify-between">
           <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
-            The Canon
+            The Canon &amp; Technical Essays
           </h2>
           <span class="font-mono text-xs text-sage dark:text-sageLight">03</span>
         </div>
-        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">The working library — theory that pays rent in
-          production</span>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Foundational literature paired with expanded production field essays</span>
       </div>
 
+      <!-- Canon Overview Cards -->
       <div class="grid sm:grid-cols-3 gap-4">
 
         <!-- Group: Computation & Compilers -->
@@ -529,6 +467,200 @@
         </div>
 
       </div>
+
+      <!-- Deep Dive Field Essays & Canonical Outlines -->
+      <div class="space-y-6 pt-4">
+        <div class="space-y-1">
+          <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Extended Field Essays</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">Detailed five-point treatments bridging canonical theory with production systems</p>
+        </div>
+
+        <!-- Essay 1: The Frugal Architect's Ledger -->
+        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+          <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
+            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Essay I · Infrastructure Economics</span>
+            <span>2025-11</span>
+          </div>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The Frugal Architect's Ledger</h4>
+          <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+            <p>
+              <strong>I. The Context:</strong> Modern cloud software often defaults to unchecked distributed decomposition. Engineers instantiate managed data warehouses, partitioned message queues, and Kubernetes control planes before their product has served its first hundred concurrent requests. What begins as an ambition for infinite elasticity inevitably transforms into an unsustainable cloud invoice.
+            </p>
+            <p>
+              <strong>II. The Core Thesis:</strong> As articulated in Werner Vogels' <em>The Frugal Architect</em>, cost is not an accounting metric reviewed at the end of the fiscal quarter; it is a fundamental non-functional requirement. An architect who cannot predict the dollar cost of a single API request does not understand their own system's mechanics.
+            </p>
+            <p>
+              <strong>III. Production Realities (pahukama.com):</strong> Rather than maintaining idle Snowflake or Redshift clusters, we pipe structured analytical telemetry directly to compressed Parquet files stored on S3. When CRM analytics are requested, an embedded DuckDB worker queries the columnar partitions in-process. Tail-latency drops from several seconds over remote wire connections to sub-second localized execution, while idle infrastructure costs collapse to zero.
+            </p>
+            <p>
+              <strong>IV. The Trade-Off &amp; Friction:</strong> Nothing comes without sacrifice. In-process DuckDB instances share the memory footprint of the host instance. A poorly structured analytical aggregation can induce memory pressure on adjacent transaction handlers if concurrency limits are omitted. We accept the friction of manual memory bounding and S3 cold-fetch latency in exchange for deleting entire multi-thousand-dollar managed clusters.
+            </p>
+            <p>
+              <strong>V. Falsification &amp; Future Bounds:</strong> This ledger holds true until analytical query volume approaches continuous saturation across gigabyte-scale datasets. When concurrent query load threatens transactional latency envelopes, the analytical workload will be extracted to an isolated worker pool—not before.
+            </p>
+          </div>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
+            Canonical root: Werner Vogels (The Frugal Architect) · Tag: DuckDB · S3 · Cost Efficiency
+          </p>
+        </article>
+
+        <!-- Essay 2: Sagas over Two-Phase Commit -->
+        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+          <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
+            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Essay II · Distributed Consistency</span>
+            <span>2025-08</span>
+          </div>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Sagas over Two-Phase Commit</h4>
+          <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+            <p>
+              <strong>I. The Context:</strong> Multi-step transaction processing across decoupled services frequently tempts engineers into reaching for distributed Two-Phase Commit (2PC) or centralized coordination orchestrators like Temporal or AWS Step Functions. However, distributed transactions across networks with intermittent latency violate the CAP theorem's availability guarantees.
+            </p>
+            <p>
+              <strong>II. The Core Thesis:</strong> Applying Pieter Hintjens' lessons from <em>The ZeroMQ Guide</em> and DeCandia's <em>Dynamo</em> paper, we recognize that network boundaries are inherently hostile and asynchronous. Consistency cannot be forced through global locks; it must be achieved through explicit, backward-compensating actions and localized state transitions.
+            </p>
+            <p>
+              <strong>III. Production Realities (pahukama.com):</strong> We implemented a native Saga orchestration engine in OCaml. Instead of deploying an external workflow daemon, each transaction stage is encoded as a discrete event on an in-memory queue backed by PostgreSQL transactional outboxes. If payment processing succeeds but inventory allocation subsequently fails, the system executes explicit domain compensations (reversing charges, releasing holds) without global locking.
+            </p>
+            <p>
+              <strong>IV. The Trade-Off &amp; Friction:</strong> The operational cost is shifted squarely into engineering diligence. A developer cannot rely on database-level `ROLLBACK`. Every domain action requires writing, testing, and verifying an idempotent compensating counterpart. If an unhandled network partition stalls an edge compensation, manual reconciliation routines must be available.
+            </p>
+            <p>
+              <strong>V. Falsification &amp; Future Bounds:</strong> The native in-memory saga pattern functions flawlessly within a modular monolith handling hundreds of concurrent multi-step orders. Should asynchronous transactions swell into thousands of heterogeneous micro-services across separate corporate boundaries, dedicated orchestration machinery will be reconsidered.
+            </p>
+          </div>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
+            Canonical root: Hintjens (ZeroMQ) &amp; DeCandia et al. (Dynamo) · Tag: OCaml · Sagas · EDA
+          </p>
+        </article>
+
+        <!-- Essay 3: ADTs Are Cheap; Incidental Complexity Is Not -->
+        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+          <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
+            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Essay III · Type Theory &amp; Correctness</span>
+            <span>2025-05</span>
+          </div>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">ADTs Are Cheap; Incidental Complexity Is Not</h4>
+          <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+            <p>
+              <strong>I. The Context:</strong> Dynamic languages and poorly typed object graphs rely heavily on defensive runtime checks: assertions, `if (x != null)` cascades, and voluminous unit tests that simply verify the structure of payloads rather than business invariants.
+            </p>
+            <p>
+              <strong>II. The Core Thesis:</strong> Grounded in Michael Sipser's formal language theory and Cartesian reductionism, state models should be provably sound. Algebraic Data Types (ADTs) and structural pattern matching allow systems to enforce state validity at compile-time. An invalid state should not be handled by an exception; it should fail to compile altogether.
+            </p>
+            <p>
+              <strong>III. Production Realities (pahukama.com):</strong> In our OCaml codebase, domain entities such as an `Order` or `CheckoutSession` cannot be constructed in inconsistent intermediate states. By modeling life-cycles using variant types (`PendingPayment of PaymentIntent | Verified of Receipt | Cancelled of Reason`), illegal transitions trigger exhaustive pattern matching compilation errors immediately upon refactoring.
+            </p>
+            <p>
+              <strong>IV. The Trade-Off &amp; Friction:</strong> Choosing OCaml over mainstream enterprise runtimes means sacrificing an endless ecosystem of off-the-shelf SDKs. We regularly write custom C-bindings or thin HTTP client drivers. We pay an upfront tooling and hiring tax to eliminate the chronic runtime defect tax that plagues large dynamic systems.
+            </p>
+            <p>
+              <strong>V. Falsification &amp; Future Bounds:</strong> If an engineering organization scales to hundreds of engineers who must rapidly churn boilerplate CRUD APIs with off-the-shelf enterprise integrations, the hiring friction of specialized functional languages may outweigh the defect-reduction dividend. For high-leverage, lean teams, ADTs remain supreme.
+            </p>
+          </div>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
+            Canonical root: Sipser (Theory of Computation) &amp; Descartes · Tag: OCaml · Type Safety · DDD
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Section: Architectural Case Studies -->
+    <section id="architecture" class="space-y-6 reveal">
+      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3">
+        <div class="flex items-baseline justify-between">
+          <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
+            Systems in Production
+          </h2>
+          <span class="font-mono text-xs text-sage dark:text-sageLight">04</span>
+        </div>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Design records from pahukama.com</span>
+      </div>
+
+      <div class="space-y-4">
+
+        <!-- Case Study 1 -->
+        <div
+          class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
+          <button onclick="toggleTab('cs1', this)" type="button" aria-expanded="false" aria-controls="cs1"
+            class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
+            <div>
+              <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">OCaml / Domain-Driven
+                Design</span>
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Modular Monolith &amp; Distributed
+                Saga Engine</h3>
+            </div>
+            <i id="cs1-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
+          </button>
+          <div id="cs1" role="region"
+            class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
+            <p><strong class="text-ink dark:text-bone">Context:</strong> Built for pahukama.com to handle distributed
+              e-commerce transactions without relying on heavy third-party workflow orchestrators.</p>
+            <p><strong class="text-ink dark:text-bone">Design:</strong> Asynchronous messaging bus with explicit
+              compensation logic, short-lived JWT tokens, and database TTL bounds to enforce idempotency across
+              intermittent networks.</p>
+            <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> Zero orchestrator daemon overhead;
+              processed 500+ transactions with fault tolerance built directly into OCaml's static type system.</p>
+            <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Every compensation is a
+              code path we must design and test ourselves; the framework gives nothing for free. In exchange, there is
+              no extra infrastructure to operate at 3 a.m.</p>
+          </div>
+        </div>
+
+        <!-- Case Study 2 -->
+        <div
+          class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
+          <button onclick="toggleTab('cs2', this)" type="button" aria-expanded="false" aria-controls="cs2"
+            class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
+            <div>
+              <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">DuckDB / AWS S3</span>
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Embedded Analytics &amp; Zero-Copy
+                Lakehouse</h3>
+            </div>
+            <i id="cs2-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
+          </button>
+          <div id="cs2" role="region"
+            class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
+            <p><strong class="text-ink dark:text-bone">Context:</strong> E-commerce analytics often suffer from
+              expensive warehouse costs (Snowflake/Redshift) during idle periods.</p>
+            <p><strong class="text-ink dark:text-bone">Design:</strong> Streamed event logs directly as Parquet files to
+              AWS S3, executing zero-copy in-memory SQL queries via embedded DuckDB instance within the backend runtime.
+            </p>
+            <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> Sub-second CRM analytical queries at
+              near-zero recurring infrastructure cost.</p>
+            <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Analytical queries share
+              the backend's memory envelope. We bound concurrency and accept S3 cold-start latency in exchange for zero
+              idle warehouse spend.</p>
+          </div>
+        </div>
+
+        <!-- Case Study 3 -->
+        <div
+          class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
+          <button onclick="toggleTab('cs3', this)" type="button" aria-expanded="false" aria-controls="cs3"
+            class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
+            <div>
+              <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">HTMX / Server-Side
+                Rendering</span>
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Resilient Projections &amp; State
+                Idempotency</h3>
+            </div>
+            <i id="cs2-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
+          </button>
+          <div id="cs3" role="region"
+            class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
+            <p><strong class="text-ink dark:text-bone">Context:</strong> Eliminating client-side SPA state divergence
+              and heavy JavaScript bundles.</p>
+            <p><strong class="text-ink dark:text-bone">Design:</strong> Server-side rendered HTML fragments coupled with
+              HTMX for declarative DOM updates, protected by token-backed request deduplication.</p>
+            <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> One language on the server, no hydration
+              bugs, mutations rendered idempotent at the edge.</p>
+            <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Interactions pay a server
+              round-trip; we accept ~80 ms p50 latency in exchange for deleting an entire client-side state layer.</p>
+          </div>
+        </div>
+
+      </div>
     </section>
 
     <!-- Section: Quiet Career Track -->
@@ -538,7 +670,7 @@
           <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
             Career Track
           </h2>
-          <span class="font-mono text-xs text-sage dark:text-sageLight">04</span>
+          <span class="font-mono text-xs text-sage dark:text-sageLight">05</span>
         </div>
         <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Engineering leadership &amp; systems
           execution</span>
@@ -717,7 +849,7 @@
     }
 
     // ----- Active nav section -----
-    const sectionIds = ['notes', 'architecture', 'canon', 'experience'];
+    const sectionIds = ['notes', 'manifesto', 'canon', 'architecture', 'experience'];
     const navLinks = sectionIds.map((id) => document.querySelector('a[href="#' + id + '"]'));
     if ('IntersectionObserver' in window) {
       const navObserver = new IntersectionObserver((entries) => {
