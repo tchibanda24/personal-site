@@ -66,7 +66,6 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       color-scheme: light;
@@ -96,33 +95,17 @@
 
     .view-panel.active {
       display: block;
-      animation: fadeIn 0.35s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     .tab-btn.tab-active {
-      color: #2b5b46;
-      border-color: #2b5b46;
-      font-weight: 600;
+      color: #1c1b18;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 1px;
     }
 
     .dark .tab-btn.tab-active {
-      color: #8ebf9f;
-      border-color: #8ebf9f;
-    }
-
-    .chevron {
-      transition: transform 0.3s ease;
+      color: #ece7dd;
     }
 
     a:focus-visible,
@@ -141,11 +124,8 @@
         scroll-behavior: auto;
       }
 
-      body,
-      .view-panel.active,
-      .chevron {
+      body {
         transition: none;
-        animation: none;
       }
     }
   </style>
@@ -154,10 +134,6 @@
 <body
   class="bg-paper text-ink dark:bg-charcoal dark:text-bone min-h-screen font-sans selection:bg-sage selection:text-paper dark:selection:bg-sageLight dark:selection:text-charcoal transition-colors">
 
-  <!-- Reading progress hairline -->
-  <div id="progress" aria-hidden="true"
-    class="fixed top-0 left-0 z-50 h-0.5 w-full origin-left scale-x-0 bg-sage dark:bg-sageLight"></div>
-
   <a href="#main"
     class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:bg-paperCard dark:focus:bg-charcoalCard focus:border focus:border-sage dark:focus:border-sageLight focus:px-3 focus:py-2 focus:rounded font-mono text-xs">
     Skip to content
@@ -165,35 +141,35 @@
 
   <!-- Header / View Tab Navigation -->
   <header
-    class="sticky top-0 z-40 border-b border-paperBorder dark:border-charcoalBorder bg-paper/95 dark:bg-charcoal/95 backdrop-blur-sm px-6 py-4">
+    class="sticky top-0 z-40 border-b border-paperBorder dark:border-charcoalBorder bg-paper dark:bg-charcoal px-6 py-4">
     <div class="max-w-3xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
       <a href="#overview" onclick="switchView('overview'); return false;"
         class="font-serif italic text-xl font-medium tracking-tight hover:text-sage dark:hover:text-sageLight transition-colors">
         Thabani Chibanda
       </a>
 
-      <div class="flex items-center justify-between sm:justify-end space-x-2 sm:space-x-4">
+      <div class="flex items-center justify-between sm:justify-end space-x-4 sm:space-x-5">
         <!-- View Switching Tabs -->
-        <nav class="flex items-center space-x-1 sm:space-x-3 text-xs sm:text-sm font-sans" aria-label="Main Navigation">
+        <nav class="flex items-center space-x-4 sm:space-x-5 font-mono text-xs" aria-label="Main Navigation">
           <button type="button" onclick="switchView('overview')" id="tab-overview"
-            class="tab-btn pb-1 border-b-2 border-transparent text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-all">
+            class="tab-btn text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
             Overview
           </button>
           <button type="button" onclick="switchView('principles')" id="tab-principles"
-            class="tab-btn pb-1 border-b-2 border-transparent text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-all">
+            class="tab-btn text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
             Principles
           </button>
           <button type="button" onclick="switchView('canon')" id="tab-canon"
-            class="tab-btn pb-1 border-b-2 border-transparent text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-all">
+            class="tab-btn text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors">
             Canon &amp; Essays
           </button>
         </nav>
 
         <!-- Dark Mode Toggle Button -->
         <button onclick="toggleTheme()" type="button" aria-label="Toggle color theme"
-          class="p-1.5 rounded hover:bg-paperCard dark:hover:bg-charcoalCard text-ink dark:text-bone transition-colors"
+          class="font-mono text-xs text-inkMuted dark:text-boneMuted hover:text-ink dark:hover:text-bone transition-colors"
           title="Toggle theme">
-          <i id="themeIcon" class="fa-regular fa-moon text-sm"></i>
+          <span id="themeLabel">Dark</span>
         </button>
       </div>
     </div>
@@ -213,8 +189,8 @@
           <h1 class="font-serif text-3xl sm:text-4xl font-normal text-ink dark:text-bone leading-tight">
             Software Engineer &amp; System Architect
           </h1>
-          <p class="font-mono text-xs text-sage dark:text-sageLight tracking-wide uppercase">
-            pahukama.com • Simplicity, Capital Efficiency &amp; Type-Safe Systems
+          <p class="font-serif italic text-lg text-inkMuted dark:text-boneMuted">
+            Building pahukama.com — notes on simplicity, capital efficiency, and type-safe systems.
           </p>
         </div>
 
@@ -234,53 +210,45 @@
           </p>
         </div>
 
-        <p class="flex items-center gap-2 font-mono text-xs text-inkMuted dark:text-boneMuted">
-          <span class="inline-block h-1.5 w-1.5 rounded-full bg-sage dark:bg-sageLight" aria-hidden="true"></span>
-          Currently — Lead Engineer &amp; Principal System Architect at pahukama.com
+        <p class="font-sans text-sm text-inkMuted dark:text-boneMuted">
+          Currently lead engineer &amp; principal system architect at pahukama.com.
         </p>
 
         <!-- Essential Contact & Resume Actions -->
-        <div class="flex flex-wrap items-center gap-4 text-xs font-mono pt-1">
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs pt-1">
           <button onclick="copyEmail()" id="emailBtn" type="button"
-            class="flex items-center space-x-2 bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder hover:border-sage dark:hover:border-sageLight px-3.5 py-2 rounded text-ink dark:text-bone transition-all">
-            <i class="fa-regular fa-envelope text-sage dark:text-sageLight"></i>
+            class="text-ink dark:text-bone underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
             <span id="emailText">contact@pahukama.com</span>
           </button>
 
           <button onclick="downloadResume()" type="button"
-            class="flex items-center space-x-2 bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder hover:border-sage dark:hover:border-sageLight px-3.5 py-2 rounded text-ink dark:text-bone transition-all">
-            <i class="fa-regular fa-file-pdf text-sage dark:text-sageLight"></i>
-            <span>PDF Resume</span>
+            class="text-ink dark:text-bone underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
+            Resume (PDF)
           </button>
 
           <a href="#principles" onclick="switchView('principles'); return false;"
-            class="flex items-center space-x-1.5 px-3 py-2 text-inkMuted dark:text-boneMuted hover:text-sage dark:hover:text-sageLight transition-colors">
-            <span>Read Architectural Principles</span>
-            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            class="text-inkMuted dark:text-boneMuted hover:text-sage dark:hover:text-sageLight transition-colors">
+            Architectural principles &rarr;
           </a>
         </div>
       </section>
 
       <!-- Featured Essay -->
       <section class="space-y-4">
-        <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2">
-          <div class="flex items-baseline justify-between">
-            <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
-              Field Notes
-            </h2>
-            <span class="font-mono text-xs text-sage dark:text-sageLight">Featured</span>
-          </div>
-          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Reflections on technical trade-offs &amp; simplicity</span>
+        <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2 flex items-baseline justify-between">
+          <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
+            Field notes
+          </h2>
+          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">featured</span>
         </div>
 
-        <article
-          class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+        <article class="space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
-            <span class="uppercase tracking-wide text-terracotta dark:text-terracottaLight">Lead Reflection</span>
+            <span>Lead reflection</span>
             <span>2026-02</span>
           </div>
           <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">
-            On Unikernels, MirageOS &amp; The Limits of Optimization
+            On unikernels, MirageOS &amp; the limits of optimization
           </h3>
 
           <p
@@ -309,168 +277,135 @@
             </p>
           </div>
 
-          <div class="flex items-center justify-between font-mono text-xs text-inkMuted dark:text-boneMuted pt-3 border-t border-paperBorder dark:border-charcoalBorder">
-            <span>Filed under: OCaml · minimalism · operational load</span>
-            <a href="#canon" onclick="switchView('canon'); return false;" class="text-sage dark:text-sageLight hover:underline">
+          <p class="font-mono text-xs pt-1">
+            <a href="#canon" onclick="switchView('canon'); return false;"
+              class="text-ink dark:text-bone underline decoration-1 underline-offset-4 hover:text-sage dark:hover:text-sageLight transition-colors">
               More technical essays &rarr;
             </a>
-          </div>
+          </p>
         </article>
       </section>
 
       <!-- Systems in Production (Case Studies) -->
       <section class="space-y-4">
-        <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2">
-          <div class="flex items-baseline justify-between">
-            <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
-              Systems in Production
-            </h2>
-            <span class="font-mono text-xs text-sage dark:text-sageLight">Architectural Records</span>
-          </div>
-          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Concrete implementations and trade-off postmortems from pahukama.com</span>
+        <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2 flex items-baseline justify-between">
+          <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
+            Systems in production
+          </h2>
+          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">pahukama.com</span>
         </div>
 
-        <div class="space-y-4">
+        <div class="space-y-8">
 
           <!-- Case Study 1 -->
-          <div
-            class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
-            <button onclick="toggleTab('cs1', this)" type="button" aria-expanded="false" aria-controls="cs1"
-              class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
-              <div>
-                <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">OCaml / Domain-Driven Design</span>
-                <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Modular Monolith &amp; Distributed Saga Engine</h3>
-              </div>
-              <i id="cs1-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
-            </button>
-            <div id="cs1" role="region"
-              class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
-              <p><strong class="text-ink dark:text-bone">Context:</strong> Built for pahukama.com to handle distributed e-commerce transactions without relying on heavy third-party workflow orchestrators.</p>
-              <p><strong class="text-ink dark:text-bone">Design:</strong> Asynchronous messaging bus with explicit compensation logic, short-lived JWT tokens, and database TTL bounds to enforce idempotency across intermittent networks.</p>
-              <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> Zero orchestrator daemon overhead; processed 500+ transactions with fault tolerance built directly into OCaml's static type system.</p>
-              <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Every compensation is a code path we must design and test ourselves; the framework gives nothing for free. In exchange, there is no extra infrastructure to operate at 3 a.m.</p>
+          <article class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-3">
+            <div class="space-y-1">
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Modular monolith &amp; distributed saga engine</h3>
+              <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">OCaml · domain-driven design</p>
             </div>
-          </div>
+            <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+              <p><strong class="text-ink dark:text-bone">Context.</strong> Built for pahukama.com to handle distributed e-commerce transactions without relying on heavy third-party workflow orchestrators.</p>
+              <p><strong class="text-ink dark:text-bone">Design.</strong> Asynchronous messaging bus with explicit compensation logic, short-lived JWT tokens, and database TTL bounds to enforce idempotency across intermittent networks.</p>
+              <p><strong class="text-ink dark:text-bone">Outcome.</strong> Zero orchestrator daemon overhead; processed 500+ transactions with fault tolerance built directly into OCaml's static type system.</p>
+              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Every compensation is a code path we must design and test ourselves; the framework gives nothing for free. In exchange, there is no extra infrastructure to operate at 3 a.m.</p>
+            </div>
+          </article>
 
           <!-- Case Study 2 -->
-          <div
-            class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
-            <button onclick="toggleTab('cs2', this)" type="button" aria-expanded="false" aria-controls="cs2"
-              class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
-              <div>
-                <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">DuckDB / AWS S3</span>
-                <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Embedded Analytics &amp; Zero-Copy Lakehouse</h3>
-              </div>
-              <i id="cs2-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
-            </button>
-            <div id="cs2" role="region"
-              class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
-              <p><strong class="text-ink dark:text-bone">Context:</strong> E-commerce analytics often suffer from expensive warehouse costs (Snowflake/Redshift) during idle periods.</p>
-              <p><strong class="text-ink dark:text-bone">Design:</strong> Streamed event logs directly as Parquet files to AWS S3, executing zero-copy in-memory SQL queries via embedded DuckDB instance within the backend runtime.</p>
-              <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> Sub-second CRM analytical queries at near-zero recurring infrastructure cost.</p>
-              <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Analytical queries share the backend's memory envelope. We bound concurrency and accept S3 cold-start latency in exchange for zero idle warehouse spend.</p>
+          <article class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-3">
+            <div class="space-y-1">
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Embedded analytics &amp; zero-copy lakehouse</h3>
+              <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">DuckDB · AWS S3</p>
             </div>
-          </div>
+            <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+              <p><strong class="text-ink dark:text-bone">Context.</strong> E-commerce analytics often suffer from expensive warehouse costs (Snowflake/Redshift) during idle periods.</p>
+              <p><strong class="text-ink dark:text-bone">Design.</strong> Streamed event logs directly as Parquet files to AWS S3, executing zero-copy in-memory SQL queries via embedded DuckDB instance within the backend runtime.</p>
+              <p><strong class="text-ink dark:text-bone">Outcome.</strong> Sub-second CRM analytical queries at near-zero recurring infrastructure cost.</p>
+              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Analytical queries share the backend's memory envelope. We bound concurrency and accept S3 cold-start latency in exchange for zero idle warehouse spend.</p>
+            </div>
+          </article>
 
           <!-- Case Study 3 -->
-          <div
-            class="border border-paperBorder dark:border-charcoalBorder rounded-lg overflow-hidden hover:border-sage/60 dark:hover:border-sageLight/50 transition-colors">
-            <button onclick="toggleTab('cs3', this)" type="button" aria-expanded="false" aria-controls="cs3"
-              class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
-              <div>
-                <span class="font-mono text-xs text-sage dark:text-sageLight uppercase">HTMX / Server-Side Rendering</span>
-                <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Resilient Projections &amp; State Idempotency</h3>
-              </div>
-              <i id="cs3-icon" class="chevron fa-solid fa-chevron-down text-inkMuted dark:text-boneMuted text-sm"></i>
-            </button>
-            <div id="cs3" role="region"
-              class="hidden p-5 border-t border-paperBorder dark:border-charcoalBorder space-y-3 font-mono text-xs text-inkMuted dark:text-boneMuted bg-paper dark:bg-charcoal">
-              <p><strong class="text-ink dark:text-bone">Context:</strong> Eliminating client-side SPA state divergence and heavy JavaScript bundles.</p>
-              <p><strong class="text-ink dark:text-bone">Design:</strong> Server-side rendered HTML fragments coupled with HTMX for declarative DOM updates, protected by token-backed request deduplication.</p>
-              <p><strong class="text-sage dark:text-sageLight">Outcome:</strong> One language on the server, no hydration bugs, mutations rendered idempotent at the edge.</p>
-              <p><strong class="text-terracotta dark:text-terracottaLight">Trade-off:</strong> Interactions pay a server round-trip; we accept ~80 ms p50 latency in exchange for deleting an entire client-side state layer.</p>
+          <article class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-3">
+            <div class="space-y-1">
+              <h3 class="font-serif text-xl font-normal text-ink dark:text-bone">Resilient projections &amp; state idempotency</h3>
+              <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">HTMX · server-side rendering</p>
             </div>
-          </div>
+            <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
+              <p><strong class="text-ink dark:text-bone">Context.</strong> Eliminating client-side SPA state divergence and heavy JavaScript bundles.</p>
+              <p><strong class="text-ink dark:text-bone">Design.</strong> Server-side rendered HTML fragments coupled with HTMX for declarative DOM updates, protected by token-backed request deduplication.</p>
+              <p><strong class="text-ink dark:text-bone">Outcome.</strong> One language on the server, no hydration bugs, mutations rendered idempotent at the edge.</p>
+              <p><strong class="text-ink dark:text-bone">Trade-off.</strong> Interactions pay a server round-trip; we accept ~80 ms p50 latency in exchange for deleting an entire client-side state layer.</p>
+            </div>
+          </article>
 
         </div>
       </section>
 
       <!-- Quiet Career Track -->
       <section class="space-y-4">
-        <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2">
-          <div class="flex items-baseline justify-between">
-            <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
-              Career Track
-            </h2>
-            <span class="font-mono text-xs text-sage dark:text-sageLight">Record</span>
-          </div>
-          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Engineering leadership, team mentorship &amp; systems execution</span>
+        <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2 flex items-baseline justify-between">
+          <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
+            Career track
+          </h2>
+          <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">2019 – present</span>
         </div>
 
-        <div class="relative ml-1 border-l border-paperBorder dark:border-charcoalBorder pl-6 space-y-8 font-mono text-xs">
+        <div class="space-y-6">
           <!-- Job Item: pahukama.com -->
-          <div class="relative space-y-1">
-            <span aria-hidden="true"
-              class="absolute -left-[30px] top-1.5 block h-2.5 w-2.5 rounded-full bg-sage dark:bg-sageLight ring-4 ring-paper dark:ring-charcoal"></span>
-            <div class="flex items-center justify-between">
-              <span class="font-semibold text-sm text-ink dark:text-bone font-serif">pahukama.com</span>
-              <span class="text-sage dark:text-sageLight">08/2023 – Present</span>
+          <div class="sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2023 – present</p>
+            <div class="space-y-1.5">
+              <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
+                pahukama.com <span class="text-inkMuted dark:text-boneMuted">— Lead Engineer &amp; Principal System Architect, Remote</span>
+              </p>
+              <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
+                Architected OCaml DDD modular monolith, custom Saga engine, and DuckDB analytics lakehouse. Leads and mentors
+                a high-trust team of 3 engineers via collaborative apprenticeship, architectural RFCs, and type-safe invariants.
+              </p>
             </div>
-            <p class="text-inkMuted dark:text-boneMuted">Lead Engineer &amp; Principal System Architect • Remote</p>
-            <p class="font-sans text-sm text-inkMuted dark:text-boneMuted pt-1 leading-relaxed">
-              Architected OCaml DDD modular monolith, custom Saga engine, and DuckDB analytics lakehouse. Leads and mentors
-              a high-trust team of 3 engineers via collaborative apprenticeship, architectural RFCs, and type-safe invariants.
-            </p>
           </div>
 
           <!-- Job Item: thatDot -->
-          <div class="relative space-y-1">
-            <span aria-hidden="true"
-              class="absolute -left-[30px] top-1.5 block h-2.5 w-2.5 rounded-full bg-paperBorder dark:bg-charcoalBorder ring-4 ring-paper dark:ring-charcoal"></span>
-            <div class="flex items-center justify-between">
-              <span class="font-semibold text-sm text-ink dark:text-bone font-serif">thatDot</span>
-              <span class="text-inkMuted dark:text-boneMuted">01/2023 – 04/2023</span>
+          <div class="sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2023</p>
+            <div class="space-y-1.5">
+              <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
+                thatDot <span class="text-inkMuted dark:text-boneMuted">— Senior Software Engineer (Contract), Portland, OR</span>
+              </p>
+              <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
+                Spearheaded technical strategy and frontend/backend integration for real-time graph data platform. Refactored streaming Scala backend APIs.
+              </p>
             </div>
-            <p class="text-inkMuted dark:text-boneMuted">Senior Software Engineer (Contract) • Portland, OR</p>
-            <p class="font-sans text-sm text-inkMuted dark:text-boneMuted pt-1 leading-relaxed">
-              Spearheaded technical strategy and frontend/backend integration for real-time graph data platform. Refactored streaming Scala backend APIs.
-            </p>
           </div>
 
           <!-- Job Item: Amazon -->
-          <div class="relative space-y-1">
-            <span aria-hidden="true"
-              class="absolute -left-[30px] top-1.5 block h-2.5 w-2.5 rounded-full bg-paperBorder dark:bg-charcoalBorder ring-4 ring-paper dark:ring-charcoal"></span>
-            <div class="flex items-center justify-between">
-              <span class="font-semibold text-sm text-ink dark:text-bone font-serif">Amazon (Prime Video)</span>
-              <span class="text-inkMuted dark:text-boneMuted">01/2021 – 01/2023</span>
+          <div class="sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2021 – 2023</p>
+            <div class="space-y-1.5">
+              <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
+                Amazon (Prime Video) <span class="text-inkMuted dark:text-boneMuted">— Software Development Engineer II, Seattle, WA</span>
+              </p>
+              <p class="font-sans text-sm text-inkMuted dark:text-boneMuted leading-relaxed">
+                Built high-throughput cloud services for testing telemetry. Designed automated ML log clustering pipelines for regression triage across iOS and Android client platforms.
+              </p>
             </div>
-            <p class="text-inkMuted dark:text-boneMuted">Software Development Engineer II • Seattle, WA</p>
-            <p class="font-sans text-sm text-inkMuted dark:text-boneMuted pt-1 leading-relaxed">
-              Built high-throughput cloud services for testing telemetry. Designed automated ML log clustering pipelines for regression triage across iOS and Android client platforms.
-            </p>
           </div>
 
           <!-- Job Item: Event Dynamic -->
-          <div class="relative space-y-1">
-            <span aria-hidden="true"
-              class="absolute -left-[30px] top-1.5 block h-2.5 w-2.5 rounded-full bg-paperBorder dark:bg-charcoalBorder ring-4 ring-paper dark:ring-charcoal"></span>
-            <div class="flex items-center justify-between">
-              <span class="font-semibold text-sm text-ink dark:text-bone font-serif">Event Dynamic (now Tillion)</span>
-              <span class="text-inkMuted dark:text-boneMuted">04/2020 – 12/2020</span>
-            </div>
-            <p class="text-inkMuted dark:text-boneMuted">Full Stack Software Developer • Dallas, TX</p>
+          <div class="sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2020</p>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
+              Event Dynamic (now Tillion) <span class="text-inkMuted dark:text-boneMuted">— Full Stack Software Developer, Dallas, TX</span>
+            </p>
           </div>
 
           <!-- Job Item: Express Scripts -->
-          <div class="relative space-y-1">
-            <span aria-hidden="true"
-              class="absolute -left-[30px] top-1.5 block h-2.5 w-2.5 rounded-full bg-paperBorder dark:bg-charcoalBorder ring-4 ring-paper dark:ring-charcoal"></span>
-            <div class="flex items-center justify-between">
-              <span class="font-semibold text-sm text-ink dark:text-bone font-serif">Express Scripts</span>
-              <span class="text-inkMuted dark:text-boneMuted">08/2019 – 03/2020</span>
-            </div>
-            <p class="text-inkMuted dark:text-boneMuted">Full Stack Developer (Contract) • St. Louis, MO</p>
+          <div class="sm:grid sm:grid-cols-[7rem_1fr] sm:gap-6 space-y-1 sm:space-y-0">
+            <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-1.5">2019 – 2020</p>
+            <p class="font-serif text-lg leading-snug text-ink dark:text-bone">
+              Express Scripts <span class="text-inkMuted dark:text-boneMuted">— Full Stack Developer (Contract), St. Louis, MO</span>
+            </p>
           </div>
         </div>
       </section>
@@ -491,20 +426,15 @@
     <!-- ========================================== -->
     <div id="view-principles" class="view-panel space-y-8">
 
-      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3">
-        <div class="flex items-baseline justify-between">
-          <h2 class="font-serif text-3xl font-normal text-ink dark:text-bone">
-            The Architect of Simplicity
-          </h2>
-          <span class="font-mono text-xs text-sage dark:text-sageLight">Operating Principles</span>
-        </div>
-        <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-1">
-          A practitioner's creed uniting business economics, deliberate velocity, mental models, and functional correctness
-        </p>
+      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3 flex items-baseline justify-between">
+        <h2 class="font-serif text-3xl font-normal text-ink dark:text-bone">
+          The architect of simplicity
+        </h2>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">operating principles</span>
       </div>
 
       <!-- Introduction to the Principles Manifesto -->
-      <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3 bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder">
+      <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
         <p>
           Anyone can make a software system complicated. Adding another microservice, message broker, or generic abstraction
           layer is the path of least resistance. 
@@ -515,122 +445,92 @@
         </p>
       </div>
 
-      <div class="space-y-4">
+      <div class="space-y-6">
         <!-- Principle I: Methodological Reduction (Descartes) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle I · Methodological Reduction</span>
-            <span class="text-inkMuted dark:text-boneMuted">René Descartes (1637)</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Strip Inherited Dogma to Undeniable First Principles</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">I · Methodological reduction — René Descartes (1637)</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Strip inherited dogma to undeniable first principles</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             Never adopt an architectural pattern because an industry consensus decreed it. Reject the default sprawl of microservices, distributed coordinators, and managed clusters until your domain proves vertical exhaustion. Divide each problem into as many parts as necessary to resolve it cleanly, and verify every interface boundary with unyielding skepticism.
           </p>
         </div>
 
         <!-- Principle II: Mathematical Boundary Defense (Sipser / Turing) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle II · Mathematical Boundary Defense</span>
-            <span class="text-inkMuted dark:text-boneMuted">Michael Sipser / Alan Turing</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Make Illegal States Unrepresentable at Compile Time</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">II · Mathematical boundary defense — Michael Sipser / Alan Turing</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Make illegal states unrepresentable at compile time</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             State transitions must mirror formal state machines. Algebraic Data Types (ADTs) and expressive type systems should police domain invariants so that invalid business states fail at compilation rather than generating cryptic 3 a.m. runtime panics. Formal correctness is not academic pedantry; it is the ultimate lever of engineering velocity.
           </p>
         </div>
 
         <!-- Principle III: Frugal Engineering & Capital Allocation (Vogels / Buffett) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle III · Frugal Engineering &amp; Unit Economics</span>
-            <span class="text-inkMuted dark:text-boneMuted">Werner Vogels / Warren Buffett</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Cost &amp; Tail-Latency Are Core Non-Functional Requirements</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">III · Frugal engineering &amp; unit economics — Werner Vogels / Warren Buffett</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Cost &amp; tail-latency are core non-functional requirements</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             Every architectural decision carries a financial invoice and a tail-latency footprint. Optimize in-process memory sharing, columnar Parquet layouts, and embedded storage engines before paying the multi-thousand-dollar cloud tax for managed distributed analytics. A frugal architecture protects gross margins and survives economic shifts; an undisciplined one drowns in infrastructure rent.
           </p>
         </div>
 
         <!-- Principle IV: Inversion & Mental Models (Charlie Munger) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle IV · Inversion &amp; Mental Models</span>
-            <span class="text-inkMuted dark:text-boneMuted">Charlie Munger</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Invert, Always Invert: Design Against Ruin First</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">IV · Inversion &amp; mental models — Charlie Munger</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Invert, always invert: design against ruin first</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             As Charlie Munger observed, many complex problems are solved only when addressed backwards. Instead of asking how to make a distributed system succeed, first ask what will inevitably destroy it: split-brain states, unbound memory spikes, data corruption, and operational burnout. Design invariants that structurally preclude catastrophic outcomes before optimizing the happy path.
           </p>
         </div>
 
         <!-- Principle V: Deliberate Velocity & Slow Productivity (Newport / Craft) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle V · Deliberate Velocity ("Slow is Smooth, Smooth is Fast")</span>
-            <span class="text-inkMuted dark:text-boneMuted">Cal Newport / Systems Craft</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Haste Is the Enemy of Real Engineering Velocity</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">V · Deliberate velocity ("slow is smooth, smooth is fast") — Cal Newport</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Haste is the enemy of real engineering velocity</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             Frantic, hype-driven development produces fragile, debt-ridden software that grinds progress to a halt within months. We subscribe to Cal Newport's ethos of slow productivity: do fewer things, focus deeply on domain invariants, and prioritize structural soundness. When you move deliberately through strict type boundaries, you do not spend half your week troubleshooting production emergencies.
           </p>
         </div>
 
         <!-- Principle VI: Decentralized Simplicity (Hintjens) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle VI · Decentralized Simplicity</span>
-            <span class="text-inkMuted dark:text-boneMuted">Pieter Hintjens (ZeroMQ)</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Prefer Dumb Pipes and Smart Endpoints over Centralized Daemons</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VI · Decentralized simplicity — Pieter Hintjens (ZeroMQ)</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Prefer dumb pipes and smart endpoints over centralized daemons</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             Centralized brokers and global coordinators create brittle operational coupling. As Pieter Hintjens proved, systems scale cleanly when messaging protocols are localized, asynchronous, and point-to-point. Compensations, retries, and idempotency belong within the domain actors themselves—never delegated to an invisible third-party workflow daemon.
           </p>
         </div>
 
         <!-- Principle VII: Functional Domain-Driven Design (Wlaschin) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle VII · Functional Domain-Driven Design</span>
-            <span class="text-inkMuted dark:text-boneMuted">Scott Wlaschin</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Types as Executable Ubiquitous Language</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VII · Functional domain-driven design — Scott Wlaschin</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Types as executable ubiquitous language</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             Domain models should not be buried under heavyweight object hierarchies or ORM abstractions. As Scott Wlaschin demonstrated, the domain model is an executable ubiquitous language composed of pure types: records for logical compositions, variants for distinct business choices, and total functions for workflows. Code documents business reality faithfully because the type system leaves no room for ambiguity.
           </p>
         </div>
 
         <!-- Principle VIII: Clean Layering & Fault Containment (Tanenbaum) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle VIII · Clean Layering &amp; Fault Containment</span>
-            <span class="text-inkMuted dark:text-boneMuted">Andrew S. Tanenbaum</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Isolate Volatile Adapters from the Core Domain Kernel</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">VIII · Clean layering &amp; fault containment — Andrew S. Tanenbaum</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Isolate volatile adapters from the core domain kernel</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             Operating system stability relies on strict boundary layering: untrusted, flaky device drivers must not run where critical kernel abstractions live. In software systems, we apply the exact same discipline. Network protocols, database drivers, and third-party vendor APIs must remain isolated at the application rim. A panic in an external adapter should never poison or crash the core domain engine.
           </p>
         </div>
 
         <!-- Principle IX: Collaborative Apprenticeship & Mentorship -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle IX · Collaborative Apprenticeship</span>
-            <span class="text-inkMuted dark:text-boneMuted">Leadership &amp; Mentorship</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Demystify Abstractions Through Hands-On Craft</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">IX · Collaborative apprenticeship — Leadership &amp; mentorship</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Demystify abstractions through hands-on craft</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             Great software systems are not preserved by isolated "rockstars"; they thrive when engineering is practiced as an open apprenticeship. Senior architects must pair collaboratively, demystify compiler errors, explain the commercial reasons behind trade-offs, and give emerging engineers hands-on ownership of complex subsystems. High agency grows through shared technical mastery.
           </p>
         </div>
 
         <!-- Principle X: Evolutionary Discipline (Fowler) -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle X · Evolutionary Discipline</span>
-            <span class="text-inkMuted dark:text-boneMuted">Martin Fowler (Refactoring)</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Continuous Restructuring Trumps Big-Bang Architectural Rewrites</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-5 space-y-2">
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">X · Evolutionary discipline — Martin Fowler (Refactoring)</p>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Continuous restructuring trumps big-bang architectural rewrites</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
             The best architectures are not carved into stone tablets; they evolve through disciplined, test-backed transformations. Clean code smells early, modularize within a monolith before carving physical network boundaries, and refactor relentlessly to keep cognitive drag near zero.
           </p>
@@ -653,25 +553,19 @@
     <!-- ========================================== -->
     <div id="view-canon" class="view-panel space-y-10">
 
-      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3">
-        <div class="flex items-baseline justify-between">
-          <h2 class="font-serif text-3xl font-normal text-ink dark:text-bone">
-            The Canon &amp; Technical Essays
-          </h2>
-          <span class="font-mono text-xs text-sage dark:text-sageLight">Library &amp; Notebook</span>
-        </div>
-        <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-1">
-          Foundational literature paired with expanded 5-point production field treatments
-        </p>
+      <div class="border-b border-paperBorder dark:border-charcoalBorder pb-3 flex items-baseline justify-between">
+        <h2 class="font-serif text-3xl font-normal text-ink dark:text-bone">
+          The canon &amp; technical essays
+        </h2>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">library &amp; notebook</span>
       </div>
 
       <!-- Canon Literature Overview -->
-      <div class="grid sm:grid-cols-3 gap-4">
+      <div class="grid sm:grid-cols-3 gap-8">
 
         <!-- Business, Mental Models & Craft -->
-        <div
-          class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-4">
-          <h3 class="font-mono text-xs uppercase tracking-wide text-terracotta dark:text-terracottaLight">Business, Models &amp; Craft</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-4 space-y-4">
+          <h3 class="font-mono text-xs text-inkMuted dark:text-boneMuted">Business, models &amp; craft</h3>
           <ul class="space-y-3">
             <li>
               <p class="font-serif text-base leading-snug text-ink dark:text-bone">Poor Charlie's Almanack</p>
@@ -693,9 +587,8 @@
         </div>
 
         <!-- Architecture & Distributed Systems -->
-        <div
-          class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-4">
-          <h3 class="font-mono text-xs uppercase tracking-wide text-sage dark:text-sageLight">Architecture &amp; Distributed Systems</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-4 space-y-4">
+          <h3 class="font-mono text-xs text-inkMuted dark:text-boneMuted">Architecture &amp; distributed systems</h3>
           <ul class="space-y-3">
             <li>
               <p class="font-serif text-base leading-snug text-ink dark:text-bone">The ZeroMQ Guide</p>
@@ -721,9 +614,8 @@
         </div>
 
         <!-- Theory, Types & Method -->
-        <div
-          class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-4">
-          <h3 class="font-mono text-xs uppercase tracking-wide text-terracotta dark:text-terracottaLight">Theory, Types &amp; Method</h3>
+        <div class="border-t border-paperBorder dark:border-charcoalBorder pt-4 space-y-4">
+          <h3 class="font-mono text-xs text-inkMuted dark:text-boneMuted">Theory, types &amp; method</h3>
           <ul class="space-y-3">
             <li>
               <p class="font-serif text-base leading-snug text-ink dark:text-bone">Domain Modeling Made Functional</p>
@@ -751,19 +643,19 @@
       </div>
 
       <!-- Extended Technical Essays -->
-      <div class="space-y-6 pt-2">
+      <div class="space-y-8 pt-2">
         <div class="space-y-1">
-          <h3 class="font-serif text-2xl font-normal text-ink dark:text-bone">Extended Technical &amp; Leadership Essays</h3>
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">Detailed five-point treatments bridging business economics, team leadership, and production architecture</p>
+          <h3 class="font-serif text-2xl font-normal text-ink dark:text-bone">Extended essays</h3>
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">Five-point treatments bridging business economics, team leadership, and production architecture</p>
         </div>
 
         <!-- Essay 1: The Frugal Architect's Ledger -->
-        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Essay I · Infrastructure Economics &amp; Capital Allocation</span>
+            <span>I · Infrastructure economics &amp; capital allocation</span>
             <span>2025-11</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The Frugal Architect's Ledger</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The frugal architect's ledger</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
               <strong>I. The Context:</strong> Modern cloud software often defaults to unchecked distributed decomposition. Engineers instantiate managed data warehouses, partitioned message queues, and Kubernetes control planes before their product has served its first hundred concurrent requests. What begins as an ambition for infinite elasticity inevitably transforms into an unsustainable cloud invoice that impairs startup gross margins.
@@ -781,18 +673,18 @@
               <strong>V. Falsification &amp; Future Bounds:</strong> This ledger holds true until analytical query volume approaches continuous saturation across gigabyte-scale datasets. When concurrent query load threatens transactional latency envelopes, the analytical workload will be extracted to an isolated worker pool—not before.
             </p>
           </div>
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
-            Canonical root: Werner Vogels &amp; Warren Buffett · Tag: DuckDB · S3 · Capital Efficiency
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
+            Rooted in Werner Vogels &amp; Warren Buffett.
           </p>
         </article>
 
         <!-- Essay 2: Functional Domain Modeling -->
-        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Essay II · Functional Domain Design</span>
+            <span>II · Functional domain design</span>
             <span>2025-09</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Functional Domain Modeling &amp; Type-Safe Workflows</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Functional domain modeling &amp; type-safe workflows</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
               <strong>I. The Context:</strong> Enterprise backends are frequently riddled with invisible execution paths: unhandled exceptions, null pointer surprises, and nested `try/catch` wrappers that mask logic errors under the guise of resilience. When an exception is thrown five call frames deep, tracing the causal flow is an exercise in archaeological excavation.
@@ -810,18 +702,18 @@
               <strong>V. Falsification &amp; Future Bounds:</strong> For trivial utility scripts or throwaway scrapers, establishing formal ADTs and railway tracks represents needless overhead. However, wherever financial transactions, inventory reserves, or legal compliance are at stake, functional DDD is non-negotiable.
             </p>
           </div>
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
-            Canonical root: Scott Wlaschin (Domain Modeling Made Functional) · Tag: OCaml · Functional DDD · Type Safety
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
+            Rooted in Scott Wlaschin, Domain Modeling Made Functional.
           </p>
         </article>
 
         <!-- Essay 3: Sagas over Two-Phase Commit -->
-        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Essay III · Distributed Consistency</span>
+            <span>III · Distributed consistency</span>
             <span>2025-08</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Sagas over Two-Phase Commit</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Sagas over two-phase commit</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
               <strong>I. The Context:</strong> Multi-step transaction processing across decoupled services frequently tempts engineers into reaching for distributed Two-Phase Commit (2PC) or centralized coordination orchestrators like Temporal or AWS Step Functions. However, distributed transactions across networks with intermittent latency violate the CAP theorem's availability guarantees.
@@ -839,18 +731,18 @@
               <strong>V. Falsification &amp; Future Bounds:</strong> The native in-memory saga pattern functions flawlessly within a modular monolith handling hundreds of concurrent multi-step orders. Should asynchronous transactions swell into thousands of heterogeneous micro-services across separate corporate boundaries, dedicated orchestration machinery will be reconsidered.
             </p>
           </div>
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
-            Canonical root: Hintjens (ZeroMQ) &amp; DeCandia et al. (Dynamo) · Tag: OCaml · Sagas · EDA
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
+            Rooted in Pieter Hintjens (ZeroMQ) &amp; DeCandia et al. (Dynamo).
           </p>
         </article>
 
         <!-- Essay 4: Clean Layering & Modularity -->
-        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Essay IV · Layered Modularity &amp; Fault Isolation</span>
+            <span>IV · Layered modularity &amp; fault isolation</span>
             <span>2025-04</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Clean Layering &amp; Fault Isolation in Backend Systems</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Clean layering &amp; fault isolation in backend systems</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
               <strong>I. The Context:</strong> Web applications routinely succumb to the "big ball of mud" syndrome. Database drivers, third-party payment SDKs, and transport protocols become tightly entwined with core business rules. When a vendor API alters its payload schema or throws an undocumented timeout, entire backend workers crash.
@@ -868,18 +760,18 @@
               <strong>V. Falsification &amp; Future Bounds:</strong> For simple CRUD applications with minimal lifespan, maintaining strict port/adapter isolation may introduce premature abstraction drag. But for core domain systems expected to survive years of third-party vendor churn, Tanenbaum's layered isolation philosophy is essential.
             </p>
           </div>
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
-            Canonical root: Andrew S. Tanenbaum (Modern Operating Systems) · Tag: Layered Architecture · Hexagonal · Modularity
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
+            Rooted in Andrew S. Tanenbaum, Modern Operating Systems.
           </p>
         </article>
 
         <!-- Essay 5: The Economics of Simplicity & Engineering Apprenticeship -->
-        <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
+        <article class="border-t border-paperBorder dark:border-charcoalBorder pt-6 space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Essay V · Management &amp; Apprenticeship</span>
+            <span>V · Management &amp; apprenticeship</span>
             <span>2025-01</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The Economics of Simplicity &amp; Engineering Apprenticeship</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">The economics of simplicity &amp; engineering apprenticeship</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
               <strong>I. The Context:</strong> Engineering organizations often believe that hiring more developers directly accelerates velocity. In practice, Brooks' Law reliably takes hold: adding personnel to a complex, undisciplined architecture creates quadratic communication drag and exponentially higher defect injection rates.
@@ -897,8 +789,8 @@
               <strong>V. Falsification &amp; Future Bounds:</strong> In massive organizations with thousands of loosely coordinated contractors, standardized bureaucratic processes and rigid microservice silos may be forced upon teams to contain organizational boundaries. For high-leverage product teams, deliberate simplicity and close apprenticeship remain unbeatable.
             </p>
           </div>
-          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
-            Canonical root: Charlie Munger &amp; Cal Newport · Tag: Team Leadership · Apprenticeship · Slow Productivity
+          <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">
+            Rooted in Charlie Munger &amp; Cal Newport.
           </p>
         </article>
 
@@ -923,18 +815,16 @@
       class="max-w-3xl mx-auto flex flex-col sm:flex-row gap-2 items-center justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
       <span>© <span id="year">2026</span> Thabani Chibanda</span>
       <span>Set in Newsreader, Plus Jakarta Sans &amp; JetBrains Mono</span>
-      <span>One static file · No build step · Zero trackers</span>
+      <span>One static file · no trackers</span>
     </div>
   </footer>
 
-  <!-- Scripting for Theme, View Switching, Accordions & Progress -->
+  <!-- Scripting for Theme, View Switching & Actions -->
   <script>
     // ----- Theme Management -----
-    function updateThemeIcon() {
+    function updateThemeLabel() {
       const dark = document.documentElement.classList.contains('dark');
-      document.getElementById('themeIcon').className = dark
-        ? 'fa-regular fa-sun text-sm'
-        : 'fa-regular fa-moon text-sm';
+      document.getElementById('themeLabel').textContent = dark ? 'Light' : 'Dark';
     }
 
     function toggleTheme() {
@@ -943,10 +833,10 @@
       html.classList.toggle('dark', !dark);
       html.classList.toggle('light', dark);
       try { localStorage.setItem('theme', dark ? 'light' : 'dark'); } catch (e) {}
-      updateThemeIcon();
+      updateThemeLabel();
     }
 
-    updateThemeIcon();
+    updateThemeLabel();
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       let stored = null;
@@ -954,7 +844,7 @@
       if (stored) return;
       document.documentElement.classList.toggle('dark', e.matches);
       document.documentElement.classList.toggle('light', !e.matches);
-      updateThemeIcon();
+      updateThemeLabel();
     });
 
     // ----- Tab / View Switching System -----
@@ -980,7 +870,6 @@
 
       // Scroll to top of main on tab switch
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      updateProgress();
     }
 
     // Initialize view from URL hash if provided
@@ -999,15 +888,6 @@
         switchView(hash);
       }
     });
-
-    // ----- Accordions for Systems Case Studies -----
-    function toggleTab(id, btn) {
-      const content = document.getElementById(id);
-      const icon = document.getElementById(id + '-icon');
-      const nowHidden = content.classList.toggle('hidden');
-      btn.setAttribute('aria-expanded', nowHidden ? 'false' : 'true');
-      icon.classList.toggle('rotate-180', !nowHidden);
-    }
 
     // ----- Copy Email Action -----
     async function copyEmail() {
@@ -1030,24 +910,6 @@
     function downloadResume() {
       alert('Attach or link your hosted PDF resume at /Thabani_Chibanda_Resume.pdf.');
     }
-
-    // ----- Reading Progress Bar -----
-    const progressBar = document.getElementById('progress');
-    let scrollTicking = false;
-    function updateProgress() {
-      const doc = document.documentElement;
-      const max = doc.scrollHeight - doc.clientHeight;
-      const p = max > 0 ? doc.scrollTop / max : 0;
-      progressBar.style.transform = 'scaleX(' + p + ')';
-    }
-
-    window.addEventListener('scroll', () => {
-      if (!scrollTicking) {
-        window.requestAnimationFrame(() => { updateProgress(); scrollTicking = false; });
-        scrollTicking = true;
-      }
-    }, { passive: true });
-    updateProgress();
 
     // ----- Footer Dynamic Year -----
     document.getElementById('year').textContent = new Date().getFullYear();
