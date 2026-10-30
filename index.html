@@ -20,7 +20,7 @@
             ink: '#1c1b18',
             inkMuted: '#686256',
             terracotta: '#9e472a',
-            sage: '#4a6b5d',
+            sage: '#2b5b46',
 
             // Soft Warm Charcoal Palette (Dark Mode)
             charcoal: '#171614',
@@ -31,7 +31,7 @@
           },
           fontFamily: {
             serif: ['Newsreader', 'Georgia', 'Cambria', 'serif'],
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             mono: ['JetBrains Mono', 'Fira Code', 'monospace']
           }
         }
@@ -42,7 +42,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -91,7 +91,7 @@
         <h1 class="font-serif text-3xl sm:text-4xl font-normal text-ink dark:text-bone leading-tight">
           Software Engineer & System Architect
         </h1>
-        <p class="font-mono text-xs text-terracotta dark:text-accentOrange tracking-wide uppercase">
+        <p class="font-mono text-xs text-terracotta dark:text-sage tracking-wide uppercase">
           pahukama.com • Distributed Systems & Type-Safe Infrastructure
         </p>
       </div>
@@ -112,14 +112,14 @@
       <!-- Essential Links -->
       <div class="flex flex-wrap items-center gap-4 text-xs font-mono pt-2">
         <button onclick="copyEmail()" id="emailBtn"
-          class="flex items-center space-x-2 bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder hover:border-terracotta px-3.5 py-2 rounded text-ink dark:text-bone transition-all">
-          <i class="fa-regular fa-envelope text-terracotta"></i>
+          class="flex items-center space-x-2 bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder hover:border-terracotta dark:hover:border-sage px-3.5 py-2 rounded text-ink dark:text-bone transition-all">
+          <i class="fa-regular fa-envelope text-terracotta dark:text-sage"></i>
           <span id="emailText">contact@pahukama.com</span>
         </button>
 
         <button onclick="downloadResume()"
-          class="flex items-center space-x-2 bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder hover:border-terracotta px-3.5 py-2 rounded text-ink dark:text-bone transition-all">
-          <i class="fa-regular fa-file-pdf text-terracotta"></i>
+          class="flex items-center space-x-2 bg-paperCard dark:bg-charcoalCard border border-paperBorder dark:border-charcoalBorder hover:border-terracotta dark:hover:border-sage px-3.5 py-2 rounded text-ink dark:text-bone transition-all">
+          <i class="fa-regular fa-file-pdf text-terracotta dark:text-sage"></i>
           <span>PDF Resume</span>
         </button>
       </div>
@@ -136,9 +136,10 @@
 
       <div
         class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
-        <p class="font-serif text-lg leading-relaxed text-ink dark:text-bone">
-          “The most reliable code is the code that was never compiled into the binary.”
+        <p class="font-serif text-lg leading-relaxed text-ink dark:text-bone italic">
+          "We can only see a short distance ahead, but we can see plenty there that needs to be done."
         </p>
+        <p class="font-mono text-xs text-sage dark:text-sage">— Alan Turing</p>
 
         <div class="prose-serif text-sm text-inkMuted dark:text-boneMuted space-y-3">
           <p>
@@ -149,7 +150,7 @@
           </p>
           <p>
             However, sound engineering requires resisting the temptation of pure technical fetishism. It is easy to fall
-            into the trap of “optimization monkey coding”—spending weeks shaving kilobytes off a binary or
+            into the trap of "optimization monkey coding"—spending weeks shaving kilobytes off a binary or
             micro-optimizing execution paths when the primary bottleneck is human comprehension or business context
             alignment.
           </p>
@@ -166,9 +167,9 @@
     <section id="architecture" class="space-y-6">
       <div class="border-b border-paperBorder dark:border-charcoalBorder pb-2">
         <h2 class="font-serif text-2xl font-normal text-ink dark:text-bone">
-          Systems & Architecture
+          Architectural Notes
         </h2>
-        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Selected design records</span>
+        <span class="font-mono text-xs text-inkMuted dark:text-boneMuted">Design records from pahukama.com</span>
       </div>
 
       <div class="space-y-4">
@@ -178,7 +179,7 @@
           <button onclick="toggleTab('cs1')"
             class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
             <div>
-              <span class="font-mono text-xs text-terracotta uppercase">OCaml / Domain-Driven Design</span>
+              <span class="font-mono text-xs text-terracotta dark:text-sage uppercase">OCaml / Domain-Driven Design</span>
               <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Modular Monolith & Distributed
                 Saga Engine</h3>
             </div>
@@ -192,7 +193,7 @@
               compensation logic, short-lived JWT tokens, and database TTL bounds to enforce idempotency across
               intermittent networks.</p>
             <p><strong class="text-ink dark:text-bone">Outcome:</strong> Zero orchestrator daemon overhead; processed
-              500+ transactions with fault tolerance built directly into OCaml’s static type system.</p>
+              500+ transactions with fault tolerance built directly into OCaml's static type system.</p>
           </div>
         </div>
 
@@ -224,7 +225,7 @@
           <button onclick="toggleTab('cs3')"
             class="w-full text-left p-5 flex items-center justify-between bg-paperCard dark:bg-charcoalCard hover:opacity-90">
             <div>
-              <span class="font-mono text-xs text-terracotta uppercase">HTMX / Server-Side Rendering</span>
+              <span class="font-mono text-xs text-terracotta dark:text-sage uppercase">HTMX / Server-Side Rendering</span>
               <h3 class="font-serif text-xl font-normal text-ink dark:text-bone mt-0.5">Resilient Projections & State
                 Idempotency</h3>
             </div>
@@ -258,7 +259,7 @@
         <div class="space-y-1">
           <div class="flex items-center justify-between">
             <span class="font-semibold text-sm text-ink dark:text-bone font-serif">pahukama.com</span>
-            <span class="text-terracotta">08/2023 – Present</span>
+            <span class="text-terracotta dark:text-sage">08/2023 – Present</span>
           </div>
           <p class="text-inkMuted dark:text-boneMuted">Lead Engineer & Principal System Architect • Remote</p>
           <p class="font-sans text-sm text-inkMuted dark:text-boneMuted pt-1 leading-relaxed">
