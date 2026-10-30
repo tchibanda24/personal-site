@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thabani Chibanda — System Architect &amp; Engineering Notebook</title>
   <meta name="description"
-    content="Thabani Chibanda — Lead Engineer &amp; Principal System Architect. Field notes on radical simplicity, OCaml, railway-oriented domain pipelines, embedded analytics, and frugal architecture.">
+    content="Thabani Chibanda — Lead Engineer &amp; Principal System Architect. Field notes on radical simplicity, OCaml, functional domain-driven design, embedded analytics, and frugal architecture.">
   <meta property="og:title" content="Thabani Chibanda — System Architect &amp; Engineering Notebook">
   <meta property="og:description"
-    content="Field notes on radical simplicity, OCaml, railway-oriented domain pipelines, embedded analytics, and frugal architecture from pahukama.com.">
+    content="Field notes on radical simplicity, OCaml, functional domain-driven design, embedded analytics, and frugal architecture from pahukama.com.">
   <meta property="og:type" content="website">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfaf6">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1a1816">
@@ -227,7 +227,7 @@
           </p>
           <p>
             With experience bridging enterprise cloud platforms (Amazon Prime Video, Express Scripts) and startup execution,
-            I favor first-principles design: OCaml for mathematically verified domain invariants, railway-oriented pipelines
+            I favor first-principles design: OCaml for mathematically verified domain invariants, functional domain models
             for deterministic execution, and localized embedded analytics over bloated managed warehouse infrastructure.
           </p>
         </div>
@@ -473,6 +473,15 @@
         </div>
       </section>
 
+      <!-- Overview Tab Closing Reflection: Descartes -->
+      <section class="py-6 text-center space-y-3">
+        <div class="w-10 h-px bg-sage/60 dark:bg-sageLight/60 mx-auto" aria-hidden="true"></div>
+        <p class="font-serif italic text-xl sm:text-2xl text-ink dark:text-bone leading-relaxed max-w-xl mx-auto">
+          "It is not enough to have a good mind; the main thing is to use it well."
+        </p>
+        <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— René Descartes, Discourse on the Method</p>
+      </section>
+
     </div>
 
     <!-- ========================================== -->
@@ -488,7 +497,7 @@
           <span class="font-mono text-xs text-sage dark:text-sageLight">Operating Principles</span>
         </div>
         <p class="font-mono text-xs text-inkMuted dark:text-boneMuted mt-1">
-          A practitioner's creed for defending radical simplicity against runaway incidental complexity
+          A practitioner's creed for defending radical simplicity, type soundness, and evolutionary engineering
         </p>
       </div>
 
@@ -504,10 +513,70 @@
       </div>
 
       <div class="space-y-4">
-        <!-- Principle I: Radical Simplicity & Subtraction -->
+        <!-- Principle I: Methodological Reduction (Descartes) -->
         <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
           <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle I · Simplicity as Subtraction</span>
+            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle I · Methodological Reduction</span>
+            <span class="text-inkMuted dark:text-boneMuted">René Descartes (1637)</span>
+          </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Strip Inherited Dogma to Undeniable First Principles</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            Never adopt an architectural pattern because an industry consensus decreed it. Reject the default sprawl of microservices, distributed coordinators, and managed clusters until your domain proves vertical exhaustion. Divide each problem into as many parts as necessary to resolve it cleanly, and verify every interface boundary with unyielding skepticism.
+          </p>
+        </div>
+
+        <!-- Principle II: Mathematical Boundary Defense (Sipser / Turing) -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle II · Mathematical Boundary Defense</span>
+            <span class="text-inkMuted dark:text-boneMuted">Sipser / Turing</span>
+          </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Make Illegal States Unrepresentable at Compile Time</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            State transitions must mirror formal state machines. Algebraic Data Types (ADTs) and expressive type systems should police domain invariants so that invalid business states fail at compilation rather than generating cryptic 3 a.m. runtime panics. Formal correctness is not academic pedantry; it is the ultimate lever of engineering velocity.
+          </p>
+        </div>
+
+        <!-- Principle III: Frugal Engineering (Vogels) -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle III · Frugal Engineering</span>
+            <span class="text-inkMuted dark:text-boneMuted">Werner Vogels (The Frugal Architect)</span>
+          </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Cost &amp; Tail-Latency Are Core Non-Functional Requirements</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            Every architectural decision carries a financial invoice and a tail-latency footprint. Optimize in-process memory sharing, columnar Parquet layouts, and embedded storage engines before paying the multi-thousand-dollar cloud tax for managed distributed analytics. A frugal architecture survives economic shifts; an undisciplined one drowns in infrastructure rent.
+          </p>
+        </div>
+
+        <!-- Principle IV: Decentralized Simplicity (Hintjens) -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle IV · Decentralized Simplicity</span>
+            <span class="text-inkMuted dark:text-boneMuted">Pieter Hintjens (ZeroMQ)</span>
+          </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Prefer Dumb Pipes and Smart Endpoints over Centralized Daemons</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            Centralized brokers and global coordinators create brittle operational coupling. As Pieter Hintjens proved, systems scale cleanly when messaging protocols are localized, asynchronous, and point-to-point. Compensations, retries, and idempotency belong within the domain actors themselves—never delegated to an invisible third-party workflow daemon.
+          </p>
+        </div>
+
+        <!-- Principle V: Evolutionary Discipline (Fowler) -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle V · Evolutionary Discipline</span>
+            <span class="text-inkMuted dark:text-boneMuted">Martin Fowler (Refactoring)</span>
+          </div>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Continuous Restructuring Trumps Big-Bang Architectural Rewrites</h3>
+          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
+            The best architectures are not carved into stone tablets; they evolve through disciplined, test-backed transformations. Clean code smells early, modularize within a monolith before carving physical network boundaries, and refactor relentlessly to keep cognitive drag near zero.
+          </p>
+        </div>
+
+        <!-- Principle VI: Radical Simplicity as Subtraction -->
+        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
+          <div class="flex items-center justify-between font-mono text-xs">
+            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle VI · Simplicity as Subtraction</span>
             <span class="text-inkMuted dark:text-boneMuted">Radical Minimalism</span>
           </div>
           <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Complexity is a Liability; Simplicity Must Be Defended</h3>
@@ -516,66 +585,39 @@
           </p>
         </div>
 
-        <!-- Principle II: Scott Wlaschin / ROP -->
+        <!-- Principle VII: Functional Domain-Driven Design (Scott Wlaschin) -->
         <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
           <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle II · Railway-Oriented Domain Pipelines</span>
+            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle VII · Functional Domain-Driven Design</span>
             <span class="text-inkMuted dark:text-boneMuted">Scott Wlaschin</span>
           </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Model Workflows as Two-Track Railways; Ban Hidden Exceptions</h3>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Types as Executable Ubiquitous Language</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Business processes are continuous transformations of state. By adopting Scott Wlaschin's Railway-Oriented Programming (ROP), domain functions output explicit `Result('success, 'error)` types. Errors are not catastrophic runtime exceptions tossed across layers; they are first-class domain values that travel along the failure track. The compiler forces every branch to be handled.
+            Domain models should not be buried under heavyweight object hierarchies or ORM abstractions. As Scott Wlaschin demonstrated, the domain model is an executable ubiquitous language composed of pure types: records for logical compositions, variants for distinct business choices, and total functions for workflows. Code documents business reality faithfully because the type system leaves no room for ambiguity.
           </p>
         </div>
 
-        <!-- Principle III: Andrew Tanenbaum / Microkernel Fault Isolation -->
+        <!-- Principle VIII: Clean Layering & Fault Containment (Andrew S. Tanenbaum) -->
         <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
           <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle III · Microkernel Isolation &amp; Blast Radiuses</span>
+            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle VIII · Clean Layering &amp; Fault Containment</span>
             <span class="text-inkMuted dark:text-boneMuted">Andrew S. Tanenbaum</span>
           </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Confine Untrusted Drivers to the Outer Rim</h3>
+          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Isolate Volatile Adapters from the Core Domain Kernel</h3>
           <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Tanenbaum proved that monolithic operating system crashes are overwhelmingly caused by third-party device drivers polluting kernel memory. We apply the same discipline: the domain kernel must remain completely pure and decoupled from volatile network drivers, database adapters, and external APIs. When an adapter panics, the core business engine continues unabated.
-          </p>
-        </div>
-
-        <!-- Principle IV: Descartes / Reductionism -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle IV · Cartesian Reductionism</span>
-            <span class="text-inkMuted dark:text-boneMuted">René Descartes (1637)</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Strip Inherited Dogma to Undeniable First Principles</h3>
-          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Refuse to adopt an architectural convention simply because the industry decrees it fashionable. Break down every component into its elementary components, verify every boundary with constructive doubt, and assemble systems step-by-step from irreducible foundational truths.
-          </p>
-        </div>
-
-        <!-- Principle V: Werner Vogels / Frugality -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-terracotta dark:text-terracottaLight uppercase tracking-wide">Principle V · The Frugal Architecture</span>
-            <span class="text-inkMuted dark:text-boneMuted">Werner Vogels</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Cost &amp; Tail-Latency Are Core Non-Functional Requirements</h3>
-          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Every architectural decision carries a financial invoice and an operational latency envelope. Optimize in-process memory sharing and zero-copy columnar layouts before leasing expensive distributed cloud machinery. A frugal, simple architecture survives market downturns; an undisciplined one drowns in infrastructure rent.
-          </p>
-        </div>
-
-        <!-- Principle VI: Pieter Hintjens / ZeroMQ -->
-        <div class="border border-paperBorder dark:border-charcoalBorder rounded-lg p-5 bg-paperCard dark:bg-charcoalCard space-y-2">
-          <div class="flex items-center justify-between font-mono text-xs">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Principle VI · Decentralized Simplicity</span>
-            <span class="text-inkMuted dark:text-boneMuted">Pieter Hintjens</span>
-          </div>
-          <h3 class="font-serif text-lg text-ink dark:text-bone font-medium">Prefer Dumb Pipes and Smart Endpoints over Centralized Daemons</h3>
-          <p class="font-serif text-inkMuted dark:text-boneMuted text-base leading-relaxed">
-            Centralized brokers and global coordinators introduce single points of failure and operational fatigue. As Hintjens demonstrated in ZeroMQ, scale emerges when communication is localized, asynchronous, and point-to-point. Compensations, retries, and idempotency belong inside the domain actors—never hidden in an external workflow daemon.
+            Operating system stability relies on strict boundary layering: untrusted, flaky device drivers must not run where critical kernel abstractions live. In software systems, we apply the exact same discipline. Network protocols, database drivers, and third-party vendor APIs must remain isolated at the application rim. A panic in an external adapter should never poison or crash the core domain engine.
           </p>
         </div>
       </div>
+
+      <!-- Principles Tab Closing Reflection: Dijkstra -->
+      <section class="py-6 text-center space-y-3">
+        <div class="w-10 h-px bg-sage/60 dark:bg-sageLight/60 mx-auto" aria-hidden="true"></div>
+        <p class="font-serif italic text-xl sm:text-2xl text-ink dark:text-bone leading-relaxed max-w-xl mx-auto">
+          "Simplicity is prerequisite for reliability."
+        </p>
+        <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— Edsger W. Dijkstra</p>
+      </section>
 
     </div>
 
@@ -712,32 +754,32 @@
           </p>
         </article>
 
-        <!-- Essay 2: Railway-Oriented Domain Pipelines -->
+        <!-- Essay 2: Functional Domain Modeling -->
         <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
             <span class="text-sage dark:text-sageLight uppercase tracking-wide">Essay II · Functional Domain Design</span>
             <span>2025-09</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Railway-Oriented Domain Pipelines</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Functional Domain Modeling &amp; Type-Safe Workflows</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
               <strong>I. The Context:</strong> Enterprise backends are frequently riddled with invisible execution paths: unhandled exceptions, null pointer surprises, and nested `try/catch` wrappers that mask logic errors under the guise of resilience. When an exception is thrown five call frames deep, tracing the causal flow is an exercise in archaeological excavation.
             </p>
             <p>
-              <strong>II. The Core Thesis:</strong> Scott Wlaschin's <em>Domain Modeling Made Functional</em> provides the antidote: Railway-Oriented Programming (ROP). A business use case is nothing more than a series of pure transformations connected along two tracks—Success and Failure. Functions take an input and return `Result('data, 'domain_error)`. Any failure diverts execution cleanly onto the error track without crashing the thread or skipping domain compensation hooks.
+              <strong>II. The Core Thesis:</strong> Scott Wlaschin's <em>Domain Modeling Made Functional</em> provides the antidote: functional domain-driven design. A business use case is nothing more than a series of pure transformations connected along two tracks—Success and Failure. Functions take an input and return `Result('data, 'domain_error)`. Any failure diverts execution cleanly onto the error track without crashing the thread or skipping domain compensation hooks.
             </p>
             <p>
-              <strong>III. Production Realities (pahukama.com):</strong> In our OCaml checkout engine, the entire order intake is expressed as a monadic composition: `validate_cart >=> reserve_inventory >=> authorize_payment >=> persist_order`. If `authorize_payment` yields `CardDeclined`, the execution never touches `persist_order`; it passes directly to the error branch handler, triggering an immediate inventory release. The compiler refuses to compile the pipeline if any potential domain error is omitted.
+              <strong>III. Production Realities (pahukama.com):</strong> In our OCaml checkout engine, the entire order intake is expressed as a monadic composition: <code>validate_cart &gt;=&gt; reserve_inventory &gt;=&gt; authorize_payment &gt;=&gt; persist_order</code>. If <code>authorize_payment</code> yields <code>CardDeclined</code>, the execution never touches <code>persist_order</code>; it passes directly to the error branch handler, triggering an immediate inventory release. The compiler refuses to compile the pipeline if any potential domain error is omitted.
             </p>
             <p>
               <strong>IV. The Trade-Off &amp; Friction:</strong> Writing idiomatic functional pipelines requires an upfront cognitive reorientation for engineers accustomed to procedural exceptions. Composing asynchronous I/O with monadic result types (`Result.t Lwt.t`) requires strict combinator discipline. You exchange runtime chaos for compiler-time ceremony.
             </p>
             <p>
-              <strong>V. Falsification &amp; Future Bounds:</strong> For trivial utility scripts or throwaway scrapers, establishing formal ADTs and railway tracks represents needless overhead. However, wherever financial transactions, inventory reserves, or legal compliance are at stake, ROP is non-negotiable.
+              <strong>V. Falsification &amp; Future Bounds:</strong> For trivial utility scripts or throwaway scrapers, establishing formal ADTs and railway tracks represents needless overhead. However, wherever financial transactions, inventory reserves, or legal compliance are at stake, functional DDD is non-negotiable.
             </p>
           </div>
           <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
-            Canonical root: Scott Wlaschin (Domain Modeling Made Functional) · Tag: OCaml · ROP · Type Safety
+            Canonical root: Scott Wlaschin (Domain Modeling Made Functional) · Tag: OCaml · Functional DDD · Type Safety
           </p>
         </article>
 
@@ -770,46 +812,47 @@
           </p>
         </article>
 
-        <!-- Essay 4: Tanenbaum's Microkernels Applied to Web Backends -->
+        <!-- Essay 4: Clean Layering & Modularity -->
         <article class="bg-paperCard dark:bg-charcoalCard p-6 rounded-lg border border-paperBorder dark:border-charcoalBorder space-y-4">
           <div class="flex items-baseline justify-between font-mono text-xs text-inkMuted dark:text-boneMuted">
-            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Essay IV · System Architecture &amp; Modularity</span>
+            <span class="text-sage dark:text-sageLight uppercase tracking-wide">Essay IV · Layered Modularity &amp; Fault Isolation</span>
             <span>2025-04</span>
           </div>
-          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Tanenbaum's Microkernels Applied to Web Backends</h4>
+          <h4 class="font-serif text-xl font-normal text-ink dark:text-bone">Clean Layering &amp; Fault Isolation in Backend Systems</h4>
           <div class="prose-serif text-inkMuted dark:text-boneMuted space-y-3">
             <p>
               <strong>I. The Context:</strong> Web applications routinely succumb to the "big ball of mud" syndrome. Database drivers, third-party payment SDKs, and transport protocols become tightly entwined with core business rules. When a vendor API alters its payload schema or throws an undocumented timeout, entire backend workers crash.
             </p>
             <p>
-              <strong>II. The Core Thesis:</strong> In <em>Modern Operating Systems</em>, Andrew S. Tanenbaum demonstrated that monolithic kernels (like standard Linux) are intrinsically fragile because device drivers run in kernel space; a bug in a printer driver crashes the entire machine. Tanenbaum advocated for microkernels (such as MINIX), where the kernel handles only minimal scheduling and IPC, while drivers run in isolated user space.
+              <strong>II. The Core Thesis:</strong> In <em>Modern Operating Systems</em>, Andrew S. Tanenbaum demonstrated that system resilience depends upon strict, clean abstraction layering and modular fault isolation. Systems break when volatile peripheral dependencies run inside the same blast radius as foundational domain operations. Reliability demands keeping the core kernel pure, with peripheral I/O isolated behind rigid adapter boundaries.
             </p>
             <p>
-              <strong>III. Production Realities (pahukama.com):</strong> We structure our backend modular monolith following the microkernel / Hexagonal principle. The "kernel" is our pure functional domain engine. Third-party integrations (Stripe, Shippo, SMTP mailers) run as isolated outer adapters behind strict interfaces. If an external driver encounters an unhandled payload exception, the blast radius is contained strictly at the adapter boundary without poisoning domain state.
+              <strong>III. Production Realities (pahukama.com):</strong> We structure our backend modular monolith following the Ports &amp; Adapters principle. The core is our pure functional domain engine. Third-party integrations (Stripe, Shippo, SMTP mailers) run as isolated outer adapters behind strict interfaces. If an external driver encounters an unhandled payload exception, the blast radius is contained strictly at the adapter boundary without poisoning domain state.
             </p>
             <p>
               <strong>IV. The Trade-Off &amp; Friction:</strong> Maintaining pure abstraction barriers requires mapping domain entities to adapter DTOs back and forth. You write additional translation boilerplate rather than passing database records directly to the HTTP serializer. We gladly pay this structural translation cost to guarantee total fault isolation.
             </p>
             <p>
-              <strong>V. Falsification &amp; Future Bounds:</strong> For simple CRUD applications with minimal lifespan, maintaining strict port/adapter isolation may introduce premature abstraction drag. But for core domain systems expected to survive years of third-party vendor churn, Tanenbaum's microkernel philosophy is essential.
+              <strong>V. Falsification &amp; Future Bounds:</strong> For simple CRUD applications with minimal lifespan, maintaining strict port/adapter isolation may introduce premature abstraction drag. But for core domain systems expected to survive years of third-party vendor churn, Tanenbaum's layered isolation philosophy is essential.
             </p>
           </div>
           <p class="font-mono text-xs text-inkMuted dark:text-boneMuted pt-2 border-t border-paperBorder dark:border-charcoalBorder">
-            Canonical root: Andrew S. Tanenbaum (Modern Operating Systems) · Tag: Microkernels · Hexagonal · Modularity
+            Canonical root: Andrew S. Tanenbaum (Modern Operating Systems) · Tag: Layered Architecture · Hexagonal · Modularity
           </p>
         </article>
 
       </div>
-    </div>
 
-    <!-- Closing Reflection -->
-    <section class="py-6 text-center space-y-3">
-      <div class="w-10 h-px bg-sage/60 dark:bg-sageLight/60 mx-auto" aria-hidden="true"></div>
-      <p class="font-serif italic text-xl sm:text-2xl text-ink dark:text-bone leading-relaxed max-w-xl mx-auto">
-        "Simplicity is prerequisite for reliability."
-      </p>
-      <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— Edsger W. Dijkstra</p>
-    </section>
+      <!-- Canon Tab Closing Reflection: Turing -->
+      <section class="py-6 text-center space-y-3">
+        <div class="w-10 h-px bg-sage/60 dark:bg-sageLight/60 mx-auto" aria-hidden="true"></div>
+        <p class="font-serif italic text-xl sm:text-2xl text-ink dark:text-bone leading-relaxed max-w-xl mx-auto">
+          "We can only see a short distance ahead, but we can see plenty there that needs to be done."
+        </p>
+        <p class="font-mono text-xs text-inkMuted dark:text-boneMuted">— Alan Turing, Computing Machinery and Intelligence</p>
+      </section>
+
+    </div>
 
   </main>
 

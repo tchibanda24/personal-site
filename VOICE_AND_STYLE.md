@@ -10,14 +10,15 @@ This document serves as the ground-truth specification for the site's design phi
 
 ### 1.1 Championing Radical Simplicity in Complex Systems
 - **Simplicity as the Hardest Architectural Discipline**: If Werner Vogels is the voice of the *Frugal Architect* (cost and latency as primary constraints), Thabani Chibanda champions *Radical Simplicity*. Complex systems naturally accumulate incidental friction, speculative abstractions, and organizational empire-building. The architect's primary duty is subtraction: preserving human comprehension, minimizing moving parts, and resisting premature distribution.
-- **Microkernel Isolation & Modularity (Tanenbaum)**: Isolate faults rigorously. Modularize systems such that failures in edge adapters cannot contaminate the core domain kernel. Keep drivers and untrusted I/O external to business rules.
+- **Layered Modularity & Fault Containment (Tanenbaum)**: Design reliable software through crisp, decoupled layers and unambiguous abstraction boundaries. When a boundary is crossed, ensure failure modes are contained locally and cannot contaminate adjacent system state.
 
 ### 1.2 Functional System Design & Boundary Enforcement
 - **OCaml & Type-Driven Correctness**: Treat OCaml not just as a preference, but as a superpower for domain modeling. Algebraic Data Types (ADTs), pattern matching, and expressive module systems allow domain invariants and state machines to be enforced at compile-time rather than through fragile runtime checks.
-- **Domain Modeling Made Functional & Railway-Oriented Programming (Scott Wlaschin)**:
-  - Model business workflows as pure composable pipelines of types: `Input -> Result<Output, Error>`.
-  - Treat success and failure as explicit tracks of a two-track railway. Errors are domain data, not out-of-band exceptions or stack-trace surprises.
-  - Make illegal states completely unrepresentable in data types.
+- **Functional Domain-Driven Design (Scott Wlaschin)**:
+  - Model business domains as pure algebraic types: product types (`AND`), sum types (`OR`), and constrained values.
+  - Make the domain model self-documenting and executable. The ubiquitous language is written directly into the type signatures.
+  - Make illegal business states completely unrepresentable in the type system.
+  - Workflows are typed transformations where domain errors are modeled as first-class return data.
 - **Architectural Patterns (DDD + Hexagonal + FC/IS + EDA)**:
   - **Domain-Driven Design (DDD)**: Explicit bounded contexts and rich, type-safe domain entities.
   - **Hexagonal Architecture (Ports & Adapters)**: Strict decoupling of core business domain logic from infrastructure, databases, and I/O drivers.
@@ -41,8 +42,8 @@ The technical mind and system philosophy driving this site are heavily shaped by
 
 ### Computer Science Foundations & Low-Level Mechanics
 - **Introduction to the Theory of Computation** — *Michael Sipser* (Automata, formal languages, reducibility, and computational complexity).
-- **Domain Modeling Made Functional** — *Scott Wlaschin* (Type-driven design, algebraic data structures, and railway-oriented programming pipelines).
-- **Modern Operating Systems** — *Andrew S. Tanenbaum* (Microkernel design, fault isolation boundaries, concurrency, and modular memory layers).
+- **Domain Modeling Made Functional** — *Scott Wlaschin* (Functional DDD, type-driven design, algebraic data structures, and typed domain workflows).
+- **Modern Operating Systems** — *Andrew S. Tanenbaum* (Clean abstraction layers, fault containment, concurrency, and modular system design).
 - **Foundations of Computer Science** — *Alfred Aho & Jeffrey Ullman*.
 - **CS106B Course Reader: Programming Abstractions in C++** — *Stanford University (Eric Roberts / Jerry Cain)* (Fundamental abstraction boundaries, pointer mechanics, and algorithmic problem solving).
 - **Compilers: Principles, Techniques, and Tools (The Dragon Book)** — *Alfred Aho, Monica Lam, Ravi Sethi, & Jeffrey Ullman* (Lexing, parsing, and code generation mechanics).
@@ -76,7 +77,7 @@ The technical mind and system philosophy driving this site are heavily shaped by
 | Domain | Technologies & Systems |
 | :--- | :--- |
 | **Languages** | OCaml (Primary Domain/Functional), Java, Scala, Python, TypeScript, JavaScript |
-| **Core Architecture** | Modular Monoliths, Domain-Driven Design (DDD), Railway-Oriented Programming (ROP), Hexagonal Architecture, Functional Core / Imperative Shell (FC/IS), Event-Driven Architecture (EDA), Custom Saga Orchestration, ZeroMQ |
+| **Core Architecture** | Modular Monoliths, Domain-Driven Design (DDD), Functional Domain Modeling, Hexagonal Architecture, Functional Core / Imperative Shell (FC/IS), Event-Driven Architecture (EDA), Custom Saga Orchestration, ZeroMQ |
 | **Data & Storage** | PostgreSQL, DuckDB, DynamoDB, S3 Parquet Data Lakes, Elasticsearch, OracleDB, Embedded LMDB |
 | **Cloud & Runtime** | AWS (EC2, Lambda, S3, DynamoDB, CloudFront, CloudFormation, Fargate, RDS), Docker, Caddy, Systemd, Linux |
 | **Web & Frontend** | HTMX, React, Vue.js, Tailwind CSS |
@@ -93,7 +94,7 @@ The technical mind and system philosophy driving this site are heavily shaped by
 - **Unpretentious**: No self-aggrandizing hype, growth-hacking jargon, or generic tech buzzwords (*"rockstar"*, *"ninja"*, *"passionate visionary"*).
 
 ### 5.2 Prose Standards
-- **Use Precise Terminology**: Name specific architectural patterns and concepts rather than hand-waving (*"railway-oriented pipelines"*, *"algebraic data types"*, *"fault isolation boundaries"*, *"saga compensations"*, *"ports and adapters"*, *"server-side idempotency"*, *"zero-copy Parquet queries"*, *"tail-latency compression"*).
+- **Use Precise Terminology**: Name specific architectural patterns and concepts rather than hand-waving (*"functional domain modeling"*, *"algebraic data types"*, *"fault containment boundaries"*, *"saga compensations"*, *"ports and adapters"*, *"server-side idempotency"*, *"zero-copy Parquet queries"*, *"tail-latency compression"*).
 - **Acknowledge Trade-Offs**: Every technical essay or case study must articulate *why* a choice was made and what was sacrificed.
 - **First-Person Authenticity**: Write in concise, direct first-person (`I`, `we`) or clear declarative statements.
 
@@ -104,9 +105,9 @@ The technical mind and system philosophy driving this site are heavily shaped by
 ### 6.1 Navigation & Tabs
 - Single static file (`index.html`), zero framework dependencies.
 - Navigation divided into three distinct conceptual views:
-  1. **Overview** (`#overview`): Hero intro, resume/contact quick links, featured essay, systems in production (case studies), and career track.
-  2. **Principles** (`#principles`): Architectural Manifesto & Developer Principles.
-  3. **Canon & Essays** (`#canon`): Reading canon and expanded 5-point technical field essays.
+  1. **Overview** (`#overview`): Hero intro, resume/contact quick links, featured essay, systems in production (case studies), career track, and closing reflection from Descartes.
+  2. **Principles** (`#principles`): Architectural Manifesto & Developer Principles with all 8 principles, closing with Dijkstra's simplicity quote.
+  3. **Canon & Essays** (`#canon`): Reading canon and expanded 5-point technical field essays, closing with Turing's quote.
 - Deep-linking supported via location hash (`#overview`, `#principles`, `#canon`).
 
 ### 6.2 Typography & Theme
